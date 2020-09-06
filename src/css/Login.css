@@ -1,0 +1,36 @@
+.icon-item{
+    padding: 20px 25%;
+    width: 50%;
+    height: 80%;
+    
+}
+.icon{
+    height: 30%;
+}
+.ion-item{
+    margin-top: 10%;
+}
+.ion-item1{
+    margin-top: 15%;
+}
+.ion-item-button{
+    height: 7%;
+    width: 90%;
+    margin-top: 15%;
+    margin-left: 4%;
+    padding: 1%;
+}
+.ion-item-text{  
+    text-align: center;
+    margin-left: 4%;
+    padding: 0 20%;
+}
+.header{
+    background: #5A5C5F;
+}
+.back{
+    width: 30px;
+    height: 25px;
+    margin-right: 10px;
+    color: #ffffff;
+}
