@@ -1,8 +1,11 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {IonApp, IonRouterOutlet} from '@ionic/react';
+import {IonReactRouter} from '@ionic/react-router';
 import Login from './pages/Login';
+import NewProduct from './pages/NewProduct';
+import ProductList from './pages/ProductList';
+import Register from './pages/Register';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -25,14 +28,19 @@ import './theme/variables.css';
 
 
 const App = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/login" component={Login} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/login" />} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
+    <IonApp>
+        <IonReactRouter>
+            <IonRouterOutlet>
+                <Switch>
+                    <Route path="/login" component={Login} exact={true}/>
+                    <Route exact path="/" render={() => <Redirect to="/login"/>}/>
+                    <Route path="/newproducts" component={NewProduct} exact={true}/>
+                    <Route path="/productos" component={ProductList} exact={true}/>
+                    <Route path="/registro" component={Register} exact={true}/>
+                </Switch>
+            </IonRouterOutlet>
+        </IonReactRouter>
+    </IonApp>
 );
 
 export default App;

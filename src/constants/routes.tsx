@@ -1,6 +1,8 @@
 const publicRoutes = {
     LOGIN: '/ingreso',
-    //REGISTER: '/registro',
+    PRODUCTS: '/productos',
+    NEWPRODUCT: '/newproducts',
+    REGISTER: '/registro',
     //ARTICLES: '/articulos',
     //USERS: '/usuarios',
     //USERS_ID: `/usuario/:id`,
@@ -8,7 +10,6 @@ const publicRoutes = {
     //ABOUT: '/acerca-de',
     //ANTD: '/antd',
     //PROFILE: '/perfil'
-  
   };
   
   const privateRoutes = {
