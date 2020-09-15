@@ -14,7 +14,6 @@ const Register: React.FC = () => {
   const [pswd, setPswd] = useState<string>();
 
   return (
-    <Router>
     <IonPage>
       <IonHeader>
         <IonToolbar className="header" color="primary">
@@ -37,13 +36,9 @@ const Register: React.FC = () => {
           <IonItem className="ion-item1">
             <IonInput type="password" value={pswd} placeholder="Contraseña" onIonChange={e => setPswd(e.detail.value!)}></IonInput>
           </IonItem>
-          <IonButton className="ion-item-button"  color="primary">Registrarse</IonButton>
+          <IonButton className="ion-item-button" color="primary">Registrarse</IonButton>
       </IonContent>
     </IonPage>
-    <Switch>
-     <Route path="/login"><Login/></Route>
-    </Switch>
-    </Router> 
   );
 };
 export default Register;
