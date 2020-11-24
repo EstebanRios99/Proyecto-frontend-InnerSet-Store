@@ -1,5 +1,7 @@
 {
-  "name": "InnerSet2",
-  "integrations": {},
+  "name": "test",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

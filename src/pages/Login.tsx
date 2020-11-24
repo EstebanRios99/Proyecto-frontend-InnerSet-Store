@@ -20,7 +20,7 @@ import API from '../data';
 import {translateMessage} from '../utils/translateMessage';
 import {useAuth} from '../providers/Auth';
 import ErrorList from '../components/ErrorList';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; 
 
 
 const Login: React.FC = () => {
@@ -76,7 +76,7 @@ const Login: React.FC = () => {
                             <IonIcon className="back" icon={keyOutline} slot="start"/>
                         </IonInput>
                     </IonItem>
-                    <Link to={"/productos"}><IonButton className="ion-item-button" color="primary">Ingresar</IonButton></Link>
+                    <IonButton className="ion-item-button" color="primary">Ingresar</IonButton>
                     <IonItem className="ion-item-text">
                         <IonText color="dark">
                             Aun no tienes cuenta, <br/>

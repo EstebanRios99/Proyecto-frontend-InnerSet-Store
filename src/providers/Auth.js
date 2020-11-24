@@ -109,7 +109,7 @@ export const AuthProvider = ( { children } ) => {
         isCheckingAuth,
         setAuthenticated,
         currentUser,
-        setCurrentUser,
+        setCurrentUser
       } }
     >
       { children }
