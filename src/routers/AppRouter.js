@@ -6,6 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import Routes from '../constants/routes';
 import NotFoundPage from '../pages/NotFoundPage';
 import Loading from '../components/Loading';
+import {Redirect} from "react-router";
 
 /**
  * El módulo loadable (https://loadable-components.com/docs/code-splitting/)
@@ -20,10 +21,12 @@ import Loading from '../components/Loading';
  */
 const loadableOptions = {fallback: <Loading/>};
 
-const AsyncHome = loadable(() => import( '../pages/Index' ), loadableOptions);
+//const AsyncHome = loadable(() => import( '../pages/Index' ), loadableOptions);
 const AsyncLogin = loadable(() => import( '../pages/Login' ), loadableOptions);
-const AsyncRegisters = loadable(() => import( '../pages/Register' ), loadableOptions);
+const AsyncClientProducts = loadable(() => import( '../pages/ClientProducts' ), loadableOptions);
+const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);
 const AsyncRegister = loadable(() => import ('../pages/RegisterUser'),loadableOptions);
+const AsyncRegisterProduct = loadable(() => import ('../pages/RegisterProduct'),loadableOptions);
 const AsyncPrivate = loadable(() => import( '../pages/Private' ), loadableOptions);
 const AsyncAbout = loadable(() => import( '../pages/About' ), loadableOptions);
 const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions);
@@ -41,15 +44,21 @@ const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions)
  */
 const AppRouter = () => (
     <Switch>
-        <PublicRoute exact path={Routes.HOME} component={AsyncHome}/>
+        <Route exact path="/">
+            <Redirect to="/ingreso" />
+        </Route>
+
         <PublicRoute path={Routes.LOGIN} component={AsyncLogin}/>
+        <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PublicRoute path={Routes.ABOUT} component={AsyncAbout}/>
 
 
         <PrivateRoute path={Routes.PRIVATE} component={AsyncPrivate}/>
-        <PrivateRoute path={Routes.REGISTERS} component={AsyncRegisters}/>
+        <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
+        <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
         <PrivateRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PrivateRoute path={Routes.LOGOUT} component={AsyncLogout}/>
+        <PrivateRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
 
         <Route component={NotFoundPage}/>
     </Switch>

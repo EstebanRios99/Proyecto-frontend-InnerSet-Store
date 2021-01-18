@@ -15,32 +15,32 @@ import {translateMessage} from '../utils/translateMessage';
 import withoutAuth from '../hocs/withoutAuth';
 import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import students from '../images/studying.png';
-import teachers from '../images/education-teacher.png';
 import Cookies from 'js-cookie';
 import {useAuth} from '../providers/Auth';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
+import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
+import {arrowBack, home} from "ionicons/icons";
 
 const {Title} = Typography;
 
 const RegisterUser = () => {
 
     const {setAuthenticated, setCurrentUser} = useAuth();
-    const [role, setRole] = useState('');
-    const [show, setShow] = useState(true);
+    const role = 'ROLE_CLIENT';
 
     const onFinish = async (userData) => {
         console.log('Received values of form: ', userData);
-        const {name, email, lastname, password, password_confirmation} = userData;
+        const {name, email, home_number, password, password_confirmation} = userData;
 
         try {
             const user = await API.post('/register', {
                 name,
-                lastname,
                 email,
+                home_number,
                 password,
                 password_confirmation,
-                role,
+                role
             });
 
             console.log('User', user);
@@ -59,50 +59,20 @@ const RegisterUser = () => {
         }
     };
 
-
-    const handleStudent = () => {
-        const role = 'ROLE_STUDENT'
-        setRole(''+role);
-        setShow(false);
-        console.log(role);
-    };
-    const handleTeacher = () => {
-        const role = 'ROLE_TEACHER'
-        setShow(false);
-        setRole(''+role);
-        console.log(role);
-    }
-
     return (
         <>
-            <Modal
-                visible={show}
-                title='Bienvenido A Trial Q'
-                closable={false}
-                footer={null}
-            >
+            <IonPage>
+                <IonHeader>
+                    <IonToolbar >
+                       <IonTitle>
+                           <Link to={ Routes.LOGIN}>
+                               <IonIcon icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
+                           </Link>
+                           Registro
+                       </IonTitle>
+                    </IonToolbar>
+                </IonHeader>
 
-                <div style={{textAling: 'center'}}>
-                    <h2>Dinos quién Eres</h2>
-                </div>
-                <div>
-                    <button className='student'><img alt='Students' src={students} onClick={handleStudent} /></button>
-                    <button className='teacher'><img alt='Teachers' src={teachers} onClick={handleTeacher}/></button>
-                </div>
-                <div style={{textAlign: 'center'}}>
-                    <Row>
-                        <Col span={10}><h3>Soy Estudiante</h3></Col>
-                        <Col span={14}><h3>Soy Maestro</h3></Col>
-                    </Row>
-                </div>
-                <div style={{textAlign: 'center'}}>
-                    <Link to={Routes.HOME}><Button type="primary" style={{margin: 8}}>Cancelar</Button></Link>
-                    <Link to={Routes.LOGIN}> Ya tengo una Cuenta... Iniciar Sesión</Link>
-                </div>
-            </Modal>
-            <Title style={{textAlign: 'center'}}>Registro</Title>
-            <Row justify='center' className='login'>
-                <Col span={8}>
                     <Form name='register-form'
                           className='register-form'
                           initialValues={{
@@ -120,18 +90,18 @@ const RegisterUser = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input prefix={<UserOutlined/>} placeholder='Nombre'/>
+                            <Input prefix={<UserOutlined/>} placeholder='Nombre Completo'/>
                         </Form.Item>
-                        <Form.Item name='lastname'
+                        <Form.Item name='home_number'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa tu apellido'
-                                       }
+                                           message: 'Ingresa tu número de casa'
+                                       },
                                    ]}
                                    hasFeedback
                         >
-                            <Input prefix={<UserOutlined/>} placeholder='Apellido'/>
+                            <Input prefix={<NumberOutlined/>} placeholder='Número de Casa'/>
                         </Form.Item>
                         <Form.Item name='email'
                                    rules={[
@@ -187,17 +157,15 @@ const RegisterUser = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type='primary' htmlType='submit' className='login-form-button'>
-                                Registrarme
-                            </Button>
-                            <div><Link to={Routes.LOGIN}>Ya tengo una cuenta</Link></div>
+                            <IonButton type='primary' htmlType='submit' className='login-form-button'>
+                                Registrar
+                            </IonButton>
                         </Form.Item>
                     </Form>
-                </Col>
-            </Row>
+           </IonPage>
         </>
     );
 };
 
-export default RegisterUser;
+export default withoutAuth(RegisterUser);
 

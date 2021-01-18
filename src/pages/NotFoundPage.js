@@ -8,7 +8,7 @@ const NotFoundPage = () => (
     status='404'
     title='404'
     subTitle='Ups... no encontramos la página que buscabas'
-    extra={ <Link to={ Routes.HOME }><Button type='primary'>Ir al inicio</Button></Link> }
+    extra={ <Link to={ Routes.LOGIN }><Button type='primary'>Ir al inicio</Button></Link> }
   />
 );
 
