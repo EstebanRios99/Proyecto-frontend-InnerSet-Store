@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
-import {home, keyOutline, mailOutline} from 'ionicons/icons';
-import Routes from '../constants/routes';
+import React from 'react';
+import {home} from 'ionicons/icons';
 import { useAuth } from '../providers/Auth';
-import { Checkbox, Col, Form, Input, Row, Button, message } from 'antd';
+import {  Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined, EyeTwoTone, EyeInvisibleOutlined, MailOutlined } from '@ant-design/icons/lib';
 import API from '../data';
 import withoutAuth from '../hocs/withoutAuth';
 import Cookies from 'js-cookie';
 import { translateMessage } from '../utils/translateMessage';
-import { Link } from 'react-router-dom';
 import '../styles/login.css';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
-import { IonContent, IonHeader, IonIcon, IonInput, IonItem, IonPage, IonTitle, IonToolbar,IonButton, IonText } from '@ionic/react';
+import {IonHeader, IonIcon, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
+import {Link} from "react-router-dom";
+import Routes from "../constants/routes";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-    const [pswd, setPswd] = useState('');
+
   const { setAuthenticated, setCurrentUser } = useAuth();
 
   const onFinish = async( userData ) => {
@@ -77,9 +76,10 @@ const Login = () => {
                     }
                 ] }
             >
-                <Input prefix={ <UserOutlined className='site-form-item-icon' /> }
+
+                <Input prefix={ <MailOutlined className='site-form-item-icon' /> }
                         placeholder='Email'
-                        autoComplete='email' />
+                        autoComplete='email'/>
             </Form.Item>
 
             <Form.Item
@@ -98,10 +98,12 @@ const Login = () => {
                 />
             </Form.Item>
 
+              <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>registrate</Link></div>
+
             <Form.Item>
-                <Button type='primary' htmlType='submit' className='login-form-button'>
+                <IonButton type='primary' htmlType='submit' className='login-form-button'>
                     Ingresar
-                </Button>
+                </IonButton>
             </Form.Item>
         </Form>
     </IonPage>
