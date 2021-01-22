@@ -1,6 +1,3 @@
-/**
- * Created by chalosalvador on 3/1/20
- */
 import React from 'react';
 import Routes from '../constants/routes';
 import Navigation from './Navigation';
