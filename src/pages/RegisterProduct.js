@@ -1,49 +1,119 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Routes from '../constants/routes';
 import API from '../data/index';
-import ej from '../images/complete.jpg'
-import {Select,Card,Skeleton, Col, Form, Input, message, Modal, Row, Typography} from 'antd';
+import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../styles/register.css';
-import {Link} from 'react-router-dom';
-import {useAuth} from '../providers/Auth';
+import {Link, Redirect, Route} from 'react-router-dom';
 import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
-import {arrowBack, home} from "ionicons/icons";
+import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
+import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 
 const { Option } = Select;
 
+
+function getBase64( file, callback ) {
+    console.log( 'file', file );
+    const reader = new FileReader();
+    reader.addEventListener( 'load', () => callback( reader.result ) );
+    reader.readAsDataURL( file );
+}
+
 const RegisterProduct = () => {
 
-    const {setAuthenticated, setCurrentUser} = useAuth();
-    const image = ej;
-    const {products, isLoading, isError, mutate} = useProducts();
+    const [ form ] = Form.useForm();
+    const {isLoading, isError, mutate} = useProducts();
+    const [ imageUrl, setImageUrl ] = useState( null );
+    const [ fileList, setFileList ] = useState( [] );
 
-    const onFinish = async data => {
-        console.log('Received values of form: ', data);
-        const {name, stock, price, category_id} = data;
+    const onCreate = async values => {
+        console.log( 'Received values of form: ', values );
 
-        try {
-            await API.post('/products', {
-                name,
-                stock,
-                price,
-                category_id,
-                image,
-            });
-            //console.log('Product', product);
-            afterCreate();
-        }catch(e){
-            console.error('No se pudo registrar', e);
-            const errorList = e.error && <ErrorList errors={e.error}/>;
-            message.error(<>{translateMessage(e.message)}{errorList}</>);
-        }
+
+        form.validateFields()
+            .then( async( values ) => {
+                console.log( 'values', values );
+
+
+                // use form data to be able to send a file to the server
+                const data = new FormData();
+                data.append( 'image', values.image[ 0 ] );
+                data.append( 'name', values.name );
+                data.append( 'stock', values.stock );
+                data.append( 'price', values.price );
+                data.append( 'category_id', values.category_id );
+
+                console.log('nuevos valores', data);
+
+                try {
+                    await API.post( '/products', data ); // post data to server
+                    form.resetFields();
+                    await afterCreate();
+                    setFileList( [] );
+                    setImageUrl( null );
+                } catch( e ) {
+                    const errorList = e.error && <ErrorList errors={ e.error } />;
+                    message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
+                }
+            } )
+            .catch( info => {
+                console.log( 'Validate Failed:', info );
+            } );
+
     };
 
     const afterCreate = async () => {
-        await mutate(`/products`);
+        await mutate('/products', async products => {
+            return {data: [{}, ...products.data]};
+        },false);
+        /*return (
+            <Route exact path="/register-product">
+                <Redirect to="/owner-products" />
+            </Route>
+        );*/
+    };
+
+
+
+
+    const normPhotoFile = e => {
+        console.log( 'Upload event:', e );
+        const file = e.file;
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if( !isJpgOrPng ) {
+            message.error( 'La imagen debe tener formato JPG o PNG' );
+            setFileList( [] );
+            setImageUrl( null );
+            return null;
+        }
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if( !isLt2M ) {
+            message.error( 'La imagen debe ser menor a 2MB' );
+            setFileList( [] );
+            setImageUrl( null );
+            return null;
+        }
+
+        if( file.status === 'removed' ) {
+            setFileList( [] );
+            setImageUrl( null );
+            return null;
+        }
+
+        getBase64( e.file, imageUrl => setImageUrl( imageUrl ) );
+
+        if( Array.isArray( e ) ) {
+            return e;
+        }
+
+        console.log( 'e.file', e.file );
+        console.log( 'e.fileList', e.fileList );
+        setFileList( [ file ] );
+
+        return e && [ e.file ];
     };
 
     if (isLoading) {
@@ -80,10 +150,11 @@ const RegisterProduct = () => {
                 </IonHeader>
 
                     <Form
+                        form={form}
                           initialValues={{
                               remember: true,
                           }}
-                          onFinish={onFinish}
+                          onFinish={onCreate}
                     >
                         <Form.Item name='name'
                                    rules={[
@@ -105,7 +176,7 @@ const RegisterProduct = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input placeholder='Cantidad del producto o Stock'/>
+                            <Input type={'number'} placeholder='Cantidad del producto o Stock'/>
                         </Form.Item>
                         <Form.Item name='price'
                                    rules={[
@@ -135,6 +206,34 @@ const RegisterProduct = () => {
                                 <Option value={"4"}>4</Option>
                                 <Option value={"5"}>5</Option>
                             </Select>
+                        </Form.Item>
+
+                        <Form.Item name='image'
+                                   label='Upload'
+                                   valuePropName='fileList'
+                                   getValueFromEvent={ normPhotoFile }
+                                   rules={ [
+                                       {
+                                           required: true,
+                                           message: 'Sube tu foto'
+                                       }
+                                   ] }
+                        >
+                            <Upload name='files'
+                                    accept='image/jpeg,image/png'
+                                    listType='picture-card'
+                                    multiple={ false }
+                                    showUploadList={ false }
+                                    beforeUpload={ () => false }
+                                    fileList={ fileList }
+                            >
+                                { imageUrl
+                                    ? <img src={ imageUrl } alt='Foto' style={ { width: '80px' } } />
+                                    : <div>
+                                        <PlusOutlined />
+                                        <div className='ant-upload-text'>Upload</div>
+                                    </div> }
+                            </Upload>
                         </Form.Item>
 
                         <Form.Item>
