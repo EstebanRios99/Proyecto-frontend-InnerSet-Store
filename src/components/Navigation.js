@@ -2,28 +2,12 @@ import React, {useState} from 'react';
 import Routes from '../constants/routes.js';
 import {useAuth} from '../providers/Auth';
 import {Menu} from 'antd';
-import {LogoutOutlined, LoginOutlined, LoadingOutlined, UserOutlined} from '@ant-design/icons';
+import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, NotificationOutlined, UserOutlined, MonitorOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
 import '../styles/navigation.css';
-import {IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle} from "@ionic/react";
 import {mailOutline, mailSharp} from "ionicons/icons";
 
 
-
-const data = [
-    {
-        title: 'Register',
-        url: Routes.REGISTER,
-        iosIcon: mailOutline,
-        mdIcon: mailSharp
-    },
-    {
-        title: 'About',
-        url: Routes.ABOUT,
-        iosIcon: mailOutline,
-        mdIcon: mailSharp
-    },
-];
 const linkStyle = {};
 
 const Navigation = (props) => {
@@ -31,7 +15,7 @@ const Navigation = (props) => {
 
     const [menuState, setMenuState] = useState({
         current: location.pathname, // set the current selected item in menu, by default the current page
-        collapsed: false,
+        collapsed: true,
         openKeys: []
     });
     const {isAuthenticated, isCheckingAuth, currentUser} = useAuth();
@@ -53,23 +37,53 @@ const Navigation = (props) => {
 
     return (
         <>
-            <IonMenu contentId="main" type="overlay">
-                <IonContent>
-                    <IonList>
-                        <IonListHeader>Register</IonListHeader>
-                        {data.map((dat, index)=>{
-                            return (
-                              <IonMenuToggle key={index}>
-                                  <IonItem className={location.pathname === dat.url ? 'selected' : ''} routerLink={dat.url}>
-                                      <IonIcon slot="start" ios={dat.iosIcon} md={dat.mdIcon} />
-                                      <IonLabel>{dat.title}</IonLabel>
-                                  </IonItem>
-                              </IonMenuToggle>
-                            );
-                        })}
-                    </IonList>
-                </IonContent>
-            </IonMenu>
+            
+           <Menu
+                mode={props.mode}
+                onClick={handleClick}
+                className='menu'
+                theme='light'
+                selectedKeys={[menuState.current]}
+                style={{
+                    lineHeight: '64px',
+                    width: 'fit-content'
+                }}
+            >
+                <Menu.Item key={Routes.OWNERPRODUCTS}>
+                    <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
+                    <FormOutlined/>
+                </Menu.Item>
+
+                <Menu.Item key={Routes.REGISTERPRODUCTS}>
+                    <Link to={Routes.REGISTERPRODUCTS} style={linkStyle}>Registrar Producto</Link>
+                    <PlusCircleOutlined/>
+                </Menu.Item>
+
+                <Menu.Item key={Routes.DAILYORDER}>
+                    <Link to={Routes.DAILYORDER} style={linkStyle}>Órdenes Nuevas</Link>
+                    <NotificationOutlined/>
+                </Menu.Item>
+
+                <Menu.Item key={Routes.ANTD}>
+                    <Link to={Routes.ANTD} style={linkStyle}>ANTD</Link>
+                    <Monitoroutlined/>
+                </Menu.Item>
+
+                <Menu.Item key={Routes.PROFILE}>
+                    <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
+                    <UserOutlined/>
+                </Menu.Item>
+                
+                <Menu.Item key={Routes.LOGIN}>
+                    <Link to={Routes.LOGOUT} className='logout-link'>
+                    {
+                        isCheckingAuth
+                        ? <LoadingOutlined/>
+                        : <><LogoutOutlined/> Salir</>
+                    }
+                    </Link>
+                 </Menu.Item>
+            </Menu>.
         </>
     );
 };
