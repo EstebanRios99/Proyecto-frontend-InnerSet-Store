@@ -5,12 +5,13 @@ import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../styles/register.css';
-import {Link, Redirect, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
+import {useCategories} from "../data/useCategories";
 
 const { Option } = Select;
 
@@ -28,6 +29,7 @@ const RegisterProduct = () => {
     const {isLoading, isError, mutate} = useProducts();
     const [ imageUrl, setImageUrl ] = useState( null );
     const [ fileList, setFileList ] = useState( [] );
+    const categories = useCategories();
 
     const onCreate = async values => {
         console.log( 'Received values of form: ', values );
@@ -176,7 +178,7 @@ const RegisterProduct = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input type={'number'} placeholder='Cantidad del producto o Stock'/>
+                            <Input  placeholder='Cantidad del producto o Stock'/>
                         </Form.Item>
                         <Form.Item name='price'
                                    rules={[
@@ -199,12 +201,16 @@ const RegisterProduct = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Select>
-                                <Option value={"1"}>1</Option>
-                                <Option value={"2"}>2</Option>
-                                <Option value={"3"}>3</Option>
-                                <Option value={"4"}>4</Option>
-                                <Option value={"5"}>5</Option>
+                            <Select placeholder={'Categorías'}>
+                                {
+                                    categories.isLoading
+                                    ? <div>Cargando...</div>
+                                    : categories.isError
+                                    ? <ShowError error={categories.isError} />
+                                    : categories.categories.map((category, i)=>
+                                    <Option value={category.id} key={i}>{category.name}</Option>
+                                    )
+                                }
                             </Select>
                         </Form.Item>
 

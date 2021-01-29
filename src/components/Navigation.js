@@ -5,8 +5,6 @@ import {Menu} from 'antd';
 import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, NotificationOutlined, UserOutlined, MonitorOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
 import '../styles/navigation.css';
-import {mailOutline, mailSharp} from "ionicons/icons";
-
 
 const linkStyle = {};
 
@@ -54,8 +52,8 @@ const Navigation = (props) => {
                     <FormOutlined/>
                 </Menu.Item>
 
-                <Menu.Item key={Routes.REGISTERPRODUCTS}>
-                    <Link to={Routes.REGISTERPRODUCTS} style={linkStyle}>Registrar Producto</Link>
+                <Menu.Item key={Routes.REGISTERPRODUCT}>
+                    <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
                     <PlusCircleOutlined/>
                 </Menu.Item>
 
@@ -66,7 +64,7 @@ const Navigation = (props) => {
 
                 <Menu.Item key={Routes.ANTD}>
                     <Link to={Routes.ANTD} style={linkStyle}>ANTD</Link>
-                    <Monitoroutlined/>
+                    <MonitorOutlined/>
                 </Menu.Item>
 
                 <Menu.Item key={Routes.PROFILE}>

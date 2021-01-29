@@ -1,21 +1,19 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton} from "antd";
-import React, {useEffect, useState} from "react";
+import {Row, Col, Skeleton, Form, Input, message} from "antd";
+import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonButton,
     IonCard, IonCardContent,
     IonCardSubtitle,
     IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon,
-    IonItem, IonLabel, IonList, IonModal, IonPage,
+    IonItem,IonModal, IonPage,
     IonRow, IonTitle, IonToolbar,
 } from "@ionic/react";
-import infoProduct from "./infoProduct";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
-import {Link} from "react-router-dom";
-import Routes from "../constants/routes";
-import {arrowBack} from "ionicons/icons";
+import {translateMessage} from "../utils/translateMessage";
+
 
 
 const ProductOwnerList = () => {
@@ -23,11 +21,41 @@ const ProductOwnerList = () => {
     const { products, isLoading, isError, mutate } = useProducts();
     const [idProduct, setIdProduct]=useState('')
     const [showInfo, setShowInfo] = useState(false);
+    const [ form ] = Form.useForm();
 
     console.log("productos", products);
 
     const product = useProduct(idProduct);
     console.log('info product', product);
+
+    const onUpdate = async values => {
+        console.log( 'Received values of form: ', values );
+
+        form.validateFields()
+            .then( async( values ) => {
+                try {
+                    await API.put( `/products/${idProduct}`, values ); // post data to server
+                    form.resetFields();
+                    await afterCreate();
+                    setShowInfo(false);
+
+                } catch( error ) {
+                    console.error(
+                        'You have an error in your code or there are Network issues.',
+                        error
+                    );
+                    message.error( translateMessage( error.message ) );
+                }
+            } )
+            .catch( info => {
+                console.log( 'Validate Failed:', info );
+            } );
+
+    };
+
+    const afterCreate = async () => {
+        await mutate('/products');
+    };
 
     if( isLoading ) {
         return <Row justify='center' gutter={ 30 }>
@@ -59,7 +87,7 @@ const ProductOwnerList = () => {
         <>
             <IonGrid>
                 <IonRow>
-            {
+            {products ?
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
@@ -72,10 +100,10 @@ const ProductOwnerList = () => {
                             <IonCardSubtitle>{product.price}</IonCardSubtitle>
                             <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardContent>
-                        <IonButton>Detalles</IonButton>
                     </IonCard>
                     </IonCol>
                 ))
+                : "Cargando..."
             }
                 </IonRow>
             </IonGrid>
@@ -94,22 +122,57 @@ const ProductOwnerList = () => {
                                         </IonTitle>
                                     </IonToolbar>
                                 </IonHeader>
-                            <IonList>
-                                <IonItem>
-                                    <img src={ `http://localhost:8000/storage/${ product.product.image }` }
-                                         style={{height: "100px", width:"100px", align: "center"}}/>
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>{product.product.name}</IonLabel>
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>{product.product.price}</IonLabel>
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>{product.product.stock}</IonLabel>
-                                </IonItem>
-                            </IonList>
-                            <IonButton onClick={()=>setShowInfo(false)}>Close</IonButton>
+
+                                    <IonItem>
+                                        <img src={ `http://localhost:8000/storage/${ product.product.image }` }
+                                             style={{height: "100px", width:"100px", align: "center"}}/>
+                                    </IonItem>
+
+                                <Form
+                                    form={form}
+                                    initialValues={{
+                                        remember: true,
+                                    }}
+                                    onFinish={onUpdate}
+                                >
+                                    <Form.Item name='name'
+                                               rules={[
+                                                   {
+                                                       required: true,
+                                                       message: 'Ingresa nombre del producto'
+                                                   }
+                                               ]}
+                                               hasFeedback
+                                     >
+                                        <Input  placeholder={product.product.name}/>
+                                    </Form.Item>
+                                    <Form.Item name='stock'
+                                               rules={[
+                                                   {
+                                                       required: true,
+                                                       message: 'Ingresa el stock o la cantidad del producto'
+                                                   },
+                                               ]}
+                                               hasFeedback
+                                    >
+                                        <Input  placeholder={product.product.stock}/>
+                                    </Form.Item>
+                                    <Form.Item name='price'
+                                               rules={[
+                                                   {
+                                                       required: true,
+                                                       message: 'Ingresa el precio del producto'
+                                                   }
+                                               ]}
+                                               hasFeedback
+                                    >
+                                        <Input  placeholder={product.product.price}/>
+                                    </Form.Item>
+                                    <IonButton type='primary' htmlType='submit' className='login-form-button'>
+                                        Actualizar Producto
+                                    </IonButton>
+                                </Form>
+                                <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                             </IonPage>
                         </IonModal>
                     </>

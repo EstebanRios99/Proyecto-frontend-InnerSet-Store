@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Routes from '../constants/routes';
 import API from '../data/index';
-import {Button, Col, Form, Input, message, Modal, Row, Typography} from 'antd';
+import { Form, Input, message} from 'antd';
 import {
     LockOutlined,
     UserOutlined,
     MailOutlined,
-    EditOutlined,
-    FileTextOutlined,
-    CloseOutlined
 } from '@ant-design/icons';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
@@ -20,9 +17,7 @@ import {useAuth} from '../providers/Auth';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
 import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
-import {arrowBack, home} from "ionicons/icons";
-
-const {Title} = Typography;
+import {arrowBack} from "ionicons/icons";
 
 const RegisterUser = () => {
 
