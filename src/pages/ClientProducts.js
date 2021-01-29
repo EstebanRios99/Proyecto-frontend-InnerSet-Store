@@ -8,7 +8,7 @@ import {
     IonButtons,
     IonMenuButton
 } from "@ionic/react";
-import {logOut, search, menu} from "ionicons/icons";
+import {logOut} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
 import {Link, Route} from "react-router-dom";
 import Routes from "../constants/routes";
