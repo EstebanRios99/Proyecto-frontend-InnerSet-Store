@@ -1,5 +1,3 @@
-
-
 const publicRoutes = {
   LOGIN: '/ingreso',
   REGISTER: '/registro',
@@ -17,6 +15,8 @@ const privateRoutes = {
   CLIENTPRODUCTS: '/client-products',
   OWNERPRODUCTS: '/owner-products',
   REGISTERPRODUCT: '/register-product',
+  DAILYORDER: '/daily-order',
+  PROFILE: '/profile',
 };
 
 const Routes = {
