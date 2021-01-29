@@ -27,9 +27,10 @@ const AsyncClientProducts = loadable(() => import( '../pages/ClientProducts' ), 
 const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);
 const AsyncRegister = loadable(() => import ('../pages/RegisterUser'),loadableOptions);
 const AsyncRegisterProduct = loadable(() => import ('../pages/RegisterProduct'),loadableOptions);
-const AsyncPrivate = loadable(() => import( '../pages/Private' ), loadableOptions);
+const AsyncDailyOrder = loadable(() => import('../pages/DailyOrders' ), loadableOptions);
 const AsyncAbout = loadable(() => import( '../pages/About' ), loadableOptions);
 const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions);
+const AsyncProfile = loadable(() => import( '../pages/Profile' ), loadableOptions);
 
 /**
  * Este es el componente que se encarga de renderizar el componente adecuado
@@ -53,7 +54,8 @@ const AppRouter = () => (
         <PublicRoute path={Routes.ABOUT} component={AsyncAbout}/>
 
 
-        <PrivateRoute path={Routes.PRIVATE} component={AsyncPrivate}/>
+        <PrivateRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
+        <PrivateRoute path={Routes.PROFILE} component={AsyncProfile}/>
         <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
         <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
         <PrivateRoute path={Routes.REGISTER} component={AsyncRegister}/>

@@ -4,9 +4,11 @@ import {
     IonIcon,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar, 
+    IonButtons,
+    IonMenuButton
 } from "@ionic/react";
-import {logOut, search} from "ionicons/icons";
+import {logOut, search, menu} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
 import {Link, Route} from "react-router-dom";
 import Routes from "../constants/routes";
@@ -19,10 +21,10 @@ const ClientProductsPage = () => {
         <IonPage>
             <IonHeader >
                 <IonToolbar>
-                    <IonTitle>
-                        Lista de Productos
-                    </IonTitle>
-                    <IonIcon icon={search} slot={"end"} style={{width: "25px",height: "25px" }}/>
+                    <IonButtons slot={"start"}>
+                        <IonMenuButton />
+                    </IonButtons>  
+                    <IonTitle> {} </IonTitle>
                     <Link to={Routes.LOGOUT}><IonIcon icon={logOut} slot={"end"} style={{width: "25px",height: "25px" }}/></Link>
                 </IonToolbar>
             </IonHeader>
