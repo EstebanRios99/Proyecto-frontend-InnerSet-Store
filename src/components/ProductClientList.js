@@ -1,19 +1,29 @@
 import {useProducts} from "../data/useProducts";
 import {Row,Col, Skeleton} from "antd";
 import Card from "antd-mobile/es/card";
-import React from "react";
+import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonCard, IonCardContent,
     IonCardSubtitle,
     IonCardTitle, IonCol, IonGrid,
     IonItem,
-    IonRow,
+    IonRow, IonToolbar,
 } from "@ionic/react";
+import {useSearchProduct} from "../data/useSearchProduct";
+import SearchProduct from "./SearchProduct";
+import Search from "antd/es/input/Search";
 
 
 const ProductClientList = () => {
+
     const { products, isLoading, isError, mutate } = useProducts();
+    const [search, setSearch]=useState('');
+
+    const {searchProduct}=useSearchProduct(search);
+
+    console.log('search', searchProduct);
+
 
     console.log("productos", products);
 
@@ -36,13 +46,24 @@ const ProductClientList = () => {
         return <ShowError error={ isError } />;
     }
 
+    const onSearch = value =>{
+        console.log('producto', value);
+        setSearch(value);
+    };
+
     return (
         <>
             <IonGrid>
                 <IonRow>
+                    <IonToolbar>
+                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
+                    </IonToolbar>
 
             {
-                products.map((product,i)=>(
+                searchProduct ?
+                    <SearchProduct searchProduct={searchProduct}/>
+                    :
+                    products.map((product,i)=>(
                     <IonCol key={i}  size="6">
                     <IonCard>
                             <IonItem >

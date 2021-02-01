@@ -13,6 +13,7 @@ import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {useCategories} from "../data/useCategories";
 
+
 const { Option } = Select;
 
 
@@ -71,11 +72,6 @@ const RegisterProduct = () => {
         await mutate('/products', async products => {
             return {data: [{}, ...products.data]};
         },false);
-        /*return (
-            <Route exact path="/register-product">
-                <Redirect to="/owner-products" />
-            </Route>
-        );*/
     };
 
 

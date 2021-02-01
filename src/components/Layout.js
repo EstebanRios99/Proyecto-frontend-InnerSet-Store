@@ -23,7 +23,7 @@ const MainLayout = props => {
           trigger='click'
           placement='bottom'
           overlayClassName='responsive-menu-wrapper'>
-          <Button type='primary'>
+          <Button type='primary' slot={"start"}>
             <svg viewBox='64 64 896 896'
               focusable='false'
               className=''

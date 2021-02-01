@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     IonHeader,
     IonIcon,
     IonPage,
     IonTitle,
-    IonToolbar, 
+    IonToolbar,
     IonButtons,
-    IonMenuButton
+    IonMenuButton, IonSearchbar
 } from "@ionic/react";
 import {logOut} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
 
 
@@ -21,11 +21,10 @@ const ClientProductsPage = () => {
         <IonPage>
             <IonHeader >
                 <IonToolbar>
-                    <IonButtons slot={"start"}>
-                        <IonMenuButton />
-                    </IonButtons>  
-                    <IonTitle> {} </IonTitle>
-                    <Link to={Routes.LOGOUT}><IonIcon icon={logOut} slot={"end"} style={{width: "25px",height: "25px" }}/></Link>
+                    <IonTitle> Lista de Productos</IonTitle>
+                    <Link to={Routes.LOGOUT} slot={"end"}>
+                        <IonIcon icon={logOut} slot={"end"} style={{width: "25px",height: "25px" }}/>
+                    </Link>
                 </IonToolbar>
             </IonHeader>
             <ProductClientList/>

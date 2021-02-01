@@ -10,15 +10,14 @@ import Layouts from '../components/Layout';
 
 const OwnerProductsPage = () => {
 
-    const {MenuList, setMenuList} = useState(false);
 
     return    (
         <>
             <IonPage>
                 <IonHeader>
                     <IonToolbar >
+                        <IonTitle slot={"primary"}>Lista de Productos </IonTitle>
                         <Layouts />
-                        <IonTitle>Lista de Productos </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <ProductOwnerList/>

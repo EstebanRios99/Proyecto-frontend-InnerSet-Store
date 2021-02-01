@@ -6,13 +6,16 @@ import {
     IonButton,
     IonCard, IonCardContent,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon,
+    IonCardTitle, IonCol, IonGrid, IonHeader,
     IonItem,IonModal, IonPage,
     IonRow, IonTitle, IonToolbar,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
 import {translateMessage} from "../utils/translateMessage";
+import {useSearchProduct} from "../data/useSearchProduct";
+import Search from "antd/es/input/Search";
+import SearchProduct from "./SearchProduct";
 
 
 
@@ -23,7 +26,13 @@ const ProductOwnerList = () => {
     const [showInfo, setShowInfo] = useState(false);
     const [ form ] = Form.useForm();
 
+    const [search, setSearch]=useState('');
+
+    const {searchProduct}=useSearchProduct(search);
+
     console.log("productos", products);
+
+    console.log("busqueda", searchProduct);
 
     const product = useProduct(idProduct);
     console.log('info product', product);
@@ -57,6 +66,11 @@ const ProductOwnerList = () => {
         await mutate('/products');
     };
 
+    const onSearch = value =>{
+        console.log('producto', value);
+        setSearch(value);
+    };
+
     if( isLoading ) {
         return <Row justify='center' gutter={ 30 }>
             {
@@ -82,12 +96,39 @@ const ProductOwnerList = () => {
         setShowInfo(true);
     }
 
+    const showDetail = (index)=>{
+        const id=index;
+        setIdProduct(id);
+        setShowInfo(true);
+    }
+
 
     return (
         <>
             <IonGrid>
                 <IonRow>
-            {products ?
+                    <IonToolbar>
+                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
+                    </IonToolbar>
+            {
+                searchProduct ?
+                    searchProduct.map((search, i)=>(
+                        <IonCol  size="6">
+                            <IonCard key={i} onClick={()=>showDetail(search.id)} >
+                                <IonItem >
+                                    <img src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px", width:"100px", align: "center"}}/>
+                                </IonItem>
+
+                                <IonCardContent>
+                                    <IonCardSubtitle>{search.price}</IonCardSubtitle>
+                                    <IonCardTitle>{search.name}</IonCardTitle>
+                                </IonCardContent>
+                            </IonCard>
+                        </IonCol>
+                    ))
+                    :
+                    products ?
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
