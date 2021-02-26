@@ -5,6 +5,11 @@ import {Menu} from 'antd';
 import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, NotificationOutlined, UserOutlined, MonitorOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
 import '../styles/navigation.css';
+import {
+    IonList,
+    IonListHeader,
+    IonNote,
+  } from '@ionic/react';
 
 const linkStyle = {};
 
@@ -47,29 +52,27 @@ const Navigation = (props) => {
                     width: 'fit-content'
                 }}
             >
-                <Menu.Item key={Routes.OWNERPRODUCTS}>
+                <IonListHeader>{currentUser.name}</IonListHeader>
+                <IonNote>{currentUser.email}</IonNote>
+
+                <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
                     <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
-                    <FormOutlined/>
                 </Menu.Item>
 
-                <Menu.Item key={Routes.REGISTERPRODUCT}>
+                <Menu.Item key={Routes.REGISTERPRODUCT} icon={<PlusCircleOutlined/>} >
                     <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
-                    <PlusCircleOutlined/>
                 </Menu.Item>
 
-                <Menu.Item key={Routes.DAILYORDER}>
+                <Menu.Item key={Routes.DAILYORDER} icon={<NotificationOutlined/>} >
                     <Link to={Routes.DAILYORDER} style={linkStyle}>Órdenes Nuevas</Link>
-                    <NotificationOutlined/>
                 </Menu.Item>
 
-                <Menu.Item key={Routes.ANTD}>
-                    <Link to={Routes.ANTD} style={linkStyle}>ANTD</Link>
-                    <MonitorOutlined/>
+                <Menu.Item key={Routes.ANTD} icon={<MonitorOutlined/>} >
+                    <Link to={Routes.ANTD} style={linkStyle}>Resumen de Ventas</Link>
                 </Menu.Item>
 
-                <Menu.Item key={Routes.PROFILE}>
+                <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                     <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
-                    <UserOutlined/>
                 </Menu.Item>
                 
                 <Menu.Item key={Routes.LOGIN}>

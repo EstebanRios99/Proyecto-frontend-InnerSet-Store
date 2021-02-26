@@ -10,8 +10,8 @@ import {
 } from "@ionic/react";
 import {logOut} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
-import {Link} from "react-router-dom";
-import Routes from "../constants/routes";
+
+import Layouts from '../components/Layout';
 
 
 const ClientProductsPage = () => {
@@ -22,9 +22,7 @@ const ClientProductsPage = () => {
             <IonHeader >
                 <IonToolbar>
                     <IonTitle> Lista de Productos</IonTitle>
-                    <Link to={Routes.LOGOUT} slot={"end"}>
-                        <IonIcon icon={logOut} slot={"end"} style={{width: "25px",height: "25px" }}/>
-                    </Link>
+                    <Layouts />
                 </IonToolbar>
             </IonHeader>
             <ProductClientList/>

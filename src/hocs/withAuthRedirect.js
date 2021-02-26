@@ -33,12 +33,13 @@ export default function withAuthRedirect( {
     }
     if( expectedAuth !== isAuthenticated ) {
       if(!expectedAuth){
-          if (currentUser.role==='ROLE_CLIENT'){
+          if (currentUser.role==='ROLE_CLIENT' || currentUser.role==="ROLE_CLIENT"){
               return <Redirect to={ {
                   pathname: Routes.CLIENTPRODUCTS,
                   state: { from: props.location }
               } } />
-          }else{
+          }
+          if (currentUser.role==="ROLE_OWNER" || currentUser.role==='ROLE_OWNER'){
               return <Redirect to={ {
                   pathname: Routes.OWNERPRODUCTS,
                   state: { from: props.location }
