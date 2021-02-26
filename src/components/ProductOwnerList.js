@@ -15,7 +15,7 @@ import {useProduct} from "../data/useProduct";
 import {translateMessage} from "../utils/translateMessage";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
-import SearchProduct from "./SearchProduct";
+
 
 
 
