@@ -5,12 +5,9 @@ import {
     IonCardTitle,
     IonCol,
     IonItem,
-    IonSearchbar,
-    IonToolbar
 } from "@ionic/react";
-import React, {useState} from "react";
-import {useSearchProduct} from "../data/useSearchProduct";
-import Search from "antd/es/input/Search";
+import React from "react";
+
 
 
 const SearchProduct = (searchProduct) => {
