@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import {Col, Popover, Button} from 'antd';
 import {useAuth} from "../providers/Auth";
+import '../styles/app.css';
 
 
 
@@ -18,11 +19,13 @@ const MainLayout = props => {
     console.log('props', props);
     const {isAuthenticated} = useAuth();
     return (
+
       <Col xs={ 2 } align='right' className='responsive-menu-button'>
         <Popover content={ <Navigation mode='vertical' /> }
           trigger='click'
-          placement='bottom'
-          overlayClassName='responsive-menu-wrapper'>
+          placement='bottomLeft'
+          overlayClassName='responsive-menu-wrapper'
+          >
           <Button type='primary' slot={"start"}>
             <svg viewBox='64 64 896 896'
               focusable='false'

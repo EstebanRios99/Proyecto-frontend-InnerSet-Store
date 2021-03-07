@@ -4,9 +4,8 @@ const publicRoutes = {
   USERS: '/usuarios',
   USERS_ID: `/usuario/:id`,
   //HOME: '/',
-  ABOUT: '/acerca-de',
   ANTD: '/antd',
-  PROFILE: '/perfil',
+  EMAIL: '/activacion',
 };
 
 const privateRoutes = {
@@ -17,6 +16,8 @@ const privateRoutes = {
   REGISTERPRODUCT: '/register-product',
   DAILYORDER: '/daily-order',
   PROFILE: '/profile',
+  NEWORDER: '/neworder',
+  
 };
 
 const Routes = {

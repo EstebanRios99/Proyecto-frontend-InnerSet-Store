@@ -30,16 +30,6 @@ body {
     text-align: center;
 }
 
-.logo {
-    height: 80px;
-//min-width: 110px;
-    /*background-image: url('../imgs/logo.png');*/
-    /*!*background-color: #00aeef;*!*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: contain;*/
-    /*background-position: center;*/
-    margin: 14px;
-}
 
 .ant-layout-header {
     height: auto;
@@ -78,6 +68,10 @@ body {
 
 .responsive-menu-wrapper .ant-popover-inner-content {
     padding:0;
+}
+
+.menu{
+    margin-left: 5px;
 }
 
 .responsive-menu-wrapper .ant-menu-dark .ant-menu-item:hover,

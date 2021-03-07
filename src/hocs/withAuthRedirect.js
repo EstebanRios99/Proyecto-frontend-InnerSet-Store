@@ -33,24 +33,31 @@ export default function withAuthRedirect( {
     }
     if( expectedAuth !== isAuthenticated ) {
       if(!expectedAuth){
-          if (currentUser.role==='ROLE_CLIENT'){
-              return <Redirect to={ {
-                  pathname: Routes.CLIENTPRODUCTS,
-                  state: { from: props.location }
-              } } />
-          }else{
-              return <Redirect to={ {
-                  pathname: Routes.OWNERPRODUCTS,
-                  state: { from: props.location }
-              } } />
-          }
-      }else{
-          return <Redirect to={ {
-              pathname: Routes.LOGIN,
+        if (currentUser.active){
+          if (currentUser.role==='ROLE_CLIENT' || currentUser.role==="ROLE_CLIENT"){
+            return <Redirect to={ {
+              pathname: Routes.CLIENTPRODUCTS,
               state: { from: props.location }
           } } />
+          }
+          if (currentUser.role==="ROLE_ADMIN" || currentUser.role==='ROLE_ADMIN'){
+            return <Redirect to={ {
+              pathname: Routes.OWNERPRODUCTS,
+              state: { from: props.location }
+          } } />
+          }
+        }else{
+          return <Redirect to={ {
+            pathname: Routes.EMAIL,
+            state: { from: props.location }
+          } } />
+        }
+      }else{
+        return <Redirect to={ {
+            pathname: Routes.LOGIN,
+            state: { from: props.location }
+        } } />
       }
-
     }
     return <WrappedComponent { ...props } />;
   };

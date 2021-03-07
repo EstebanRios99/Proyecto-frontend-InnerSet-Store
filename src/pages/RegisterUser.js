@@ -15,10 +15,12 @@ import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {useAuth} from '../providers/Auth';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
-import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {IonButton, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
+import logo from '../images/logo-inner.PNG';
 import "../theme/toolbar.css";
+
 
 const RegisterUser = () => {
 
@@ -60,15 +62,17 @@ const RegisterUser = () => {
             <IonPage>
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
-                       <IonTitle id={"letter"}>
-                           <Link to={ Routes.LOGIN}>
-                               <IonIcon id={"icon"} icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
-                           </Link>
+                       <IonTitle className="iontitle" id={"letter"}>
+                            <Link to={ Routes.LOGIN}>
+                                <IonIcon icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
+                            </Link>
                            Registro
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
-
+                <br></br>
+                <IonImg src={logo} style={{width:"100px", height:"100px", display:"block", margin:"auto"}}/>
+                <br></br>
                     <Form name='register-form'
                           className='register-form'
                           initialValues={{
@@ -91,9 +95,14 @@ const RegisterUser = () => {
                         <Form.Item name='home_number'
                                    rules={[
                                        {
-                                           required: true,
-                                           message: 'Ingresa tu número de casa'
+                                            required: true,
+                                            message: 'Ingresa tu número de casa, 1 -60',
                                        },
+                                       {
+                                            min: 1,
+                                            max: 60,
+                                            message: 'El numero de casa debe ser del 1-60'
+                                       }
                                    ]}
                                    hasFeedback
                         >
@@ -102,12 +111,12 @@ const RegisterUser = () => {
                         <Form.Item name='email'
                                    rules={[
                                        {
-                                           required: true,
-                                           message: 'Ingresa tu email'
+                                            required: true,
+                                            message: 'Ingresa tu email'
                                        },
                                        {
-                                           type: 'email',
-                                           message: 'Ingresa un correo válido'
+                                            type: 'email',
+                                            message: 'Ingresa un correo válido'
                                        }
                                    ]}
                                    hasFeedback
@@ -117,10 +126,14 @@ const RegisterUser = () => {
 
                         <Form.Item name='password'
                                    rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa tu contraseña'
-                                       }
+                                        {
+                                            required: true,
+                                            message: 'Ingresa tu contraseña',
+                                        },
+                                        {
+                                            min: 6,
+                                            message: 'La longitud de ser mínimo 6 caracteres',
+                                        }
                                    ]}
                                    hasFeedback
                         >

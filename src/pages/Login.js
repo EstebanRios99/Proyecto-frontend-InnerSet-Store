@@ -1,5 +1,4 @@
 import React from 'react';
-import {home} from 'ionicons/icons';
 import { useAuth } from '../providers/Auth';
 import {  Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined, EyeTwoTone, EyeInvisibleOutlined, MailOutlined } from '@ant-design/icons/lib';
@@ -8,10 +7,12 @@ import withoutAuth from '../hocs/withoutAuth';
 import Cookies from 'js-cookie';
 import { translateMessage } from '../utils/translateMessage';
 import ErrorList from '../components/ErrorList';
+import '../theme/variables.css';
+import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
 import '../theme/toolbar.css';
-import {IonHeader, IonIcon, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
 import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
+import logo from '../images/logo-inner.PNG';
 
 
 const Login = () => {
@@ -51,8 +52,10 @@ const Login = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-
-          <IonIcon icon={home} style={{width:"100px", height:"100px"}} />
+      <br />
+          <IonImg src={logo} style={{width:"150px", height:"150px", display:"block", margin:"auto"}}/>
+      <br />
+                    
           <Form
             name='login-form'
             className='login-form'
@@ -98,7 +101,7 @@ const Login = () => {
                 />
             </Form.Item>
 
-              <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>registrate</Link></div>
+              <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>Registrate</Link></div>
 
             <Form.Item>
                 <IonButton type='primary' htmlType='submit' className='login-form-button'>
