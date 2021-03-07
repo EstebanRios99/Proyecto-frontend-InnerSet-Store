@@ -6,13 +6,14 @@ import API from '../data';
 import withoutAuth from '../hocs/withoutAuth';
 import Cookies from 'js-cookie';
 import { translateMessage } from '../utils/translateMessage';
-import '../styles/login.css';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
 import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
+import '../theme/toolbar.css';
 import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
 import logo from '../images/logo-inner.PNG';
+
 
 const Login = () => {
 
@@ -45,15 +46,16 @@ const Login = () => {
     <>
     <IonPage>
       <IonHeader>
-        <IonToolbar >
-          <IonTitle>
+        <IonToolbar id={"toolbar"}>
+          <IonTitle id={"letter"}>
             InnerSet Store
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <br></br>
+      <br />
           <IonImg src={logo} style={{width:"150px", height:"150px", display:"block", margin:"auto"}}/>
-      <br></br>
+      <br />
+                    
           <Form
             name='login-form'
             className='login-form'

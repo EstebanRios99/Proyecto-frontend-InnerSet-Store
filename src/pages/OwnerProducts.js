@@ -8,6 +8,7 @@ import {
 import ProductOwnerList from "../components/ProductOwnerList";
 import Layouts from '../components/Layout';
 import '../styles/app.css';
+import "../theme/toolbar.css";
 
 const OwnerProductsPage = () => {
 
@@ -16,11 +17,11 @@ const OwnerProductsPage = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar >
+                    <IonToolbar id={"toolbar"}>
                         <div slot={"start"} className="menu">
                             <Layouts />
                         </div>
-                        <IonTitle>Lista de Productos </IonTitle>
+                        <IonTitle id={"letter"}>Lista de Productos </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <ProductOwnerList/>

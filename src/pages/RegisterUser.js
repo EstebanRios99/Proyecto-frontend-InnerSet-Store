@@ -19,6 +19,8 @@ import {IonButton, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar} fr
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
 import logo from '../images/logo-inner.PNG';
+import "../theme/toolbar.css";
+
 
 const RegisterUser = () => {
 
@@ -59,8 +61,8 @@ const RegisterUser = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar>
-                       <IonTitle className="iontitle">
+                    <IonToolbar id={"toolbar"}>
+                       <IonTitle className="iontitle" id={"letter"}>
                             <Link to={ Routes.LOGIN}>
                                 <IonIcon icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
                             </Link>
