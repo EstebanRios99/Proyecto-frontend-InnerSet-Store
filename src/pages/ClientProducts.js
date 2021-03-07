@@ -8,8 +8,8 @@ import {
     IonButtons,
     IonMenuButton, IonSearchbar
 } from "@ionic/react";
-import {logOut} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
+import '../styles/app.css';
 
 import Layouts from '../components/Layout';
 
@@ -21,8 +21,12 @@ const ClientProductsPage = () => {
         <IonPage>
             <IonHeader >
                 <IonToolbar>
-                    <IonTitle> Lista de Productos</IonTitle>
-                    <Layouts />
+                <IonToolbar >
+                        <div slot={"start"} className="menu">
+                            <Layouts />
+                        </div>
+                        <IonTitle>Lista de Productos </IonTitle>
+                    </IonToolbar>
                 </IonToolbar>
             </IonHeader>
             <ProductClientList/>

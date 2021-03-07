@@ -5,10 +5,12 @@ import {Menu} from 'antd';
 import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, NotificationOutlined, UserOutlined, MonitorOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
 import '../styles/navigation.css';
+import '../styles/app.css';
 import {
-    IonList,
-    IonListHeader,
     IonNote,
+    IonAvatar,
+    IonItem,
+    IonLabel,
   } from '@ionic/react';
 
 const linkStyle = {};
@@ -52,29 +54,45 @@ const Navigation = (props) => {
                     width: 'fit-content'
                 }}
             >
-                <IonListHeader>{currentUser.name}</IonListHeader>
-                <IonNote>{currentUser.email}</IonNote>
-
-                <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
-                    <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
-                </Menu.Item>
-
-                <Menu.Item key={Routes.REGISTERPRODUCT} icon={<PlusCircleOutlined/>} >
-                    <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
-                </Menu.Item>
-
-                <Menu.Item key={Routes.DAILYORDER} icon={<NotificationOutlined/>} >
-                    <Link to={Routes.DAILYORDER} style={linkStyle}>Órdenes Nuevas</Link>
-                </Menu.Item>
-
-                <Menu.Item key={Routes.ANTD} icon={<MonitorOutlined/>} >
-                    <Link to={Routes.ANTD} style={linkStyle}>Resumen de Ventas</Link>
-                </Menu.Item>
-
-                <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
-                    <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
-                </Menu.Item>
-                
+                <IonItem>
+                    <IonAvatar slot="end">
+                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                    </IonAvatar>
+                    <IonLabel>
+                        <h3>{currentUser.name}</h3>
+                        <p>{currentUser.email}</p>
+                    </IonLabel> 
+                </IonItem>
+                {currentUser.role==='ROLE_ADMIN'
+                ?   <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
+                        <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
+                    </Menu.Item>
+                :   <Menu.Item key={Routes.CLIENTPRODUCTS} icon={<FormOutlined/>} >
+                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Productos</Link>
+                    </Menu.Item>
+                }
+                {currentUser.role==='ROLE_ADMIN'
+                ?   <Menu.Item key={Routes.REGISTERPRODUCT} icon={<PlusCircleOutlined/>} >
+                        <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
+                    </Menu.Item>
+                :   <Menu.Item key={Routes.DAILYORDER} icon={<PlusCircleOutlined/>} >
+                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de Orden</Link>
+                    </Menu.Item>
+                }
+                {currentUser.role==='ROLE_ADMIN'
+                ?   <><Menu.Item key={Routes.NEWORDER} icon={<NotificationOutlined/>} >
+                        <Link to={Routes.NEWORDER} style={linkStyle}>Órdenes Nuevas</Link>
+                    </Menu.Item>
+                    <Menu.Item key={Routes.ANTD} icon={<MonitorOutlined/>} >
+                        <Link to={Routes.ANTD} style={linkStyle}>Reportes de Ventas</Link>
+                    </Menu.Item>
+                    <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
+                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
+                    </Menu.Item></>
+                :   <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
+                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
+                    </Menu.Item>
+                }  
                 <Menu.Item key={Routes.LOGIN}>
                     <Link to={Routes.LOGOUT} className='logout-link'>
                     {
@@ -84,7 +102,7 @@ const Navigation = (props) => {
                     }
                     </Link>
                  </Menu.Item>
-            </Menu>.
+            </Menu>
         </>
     );
 };
