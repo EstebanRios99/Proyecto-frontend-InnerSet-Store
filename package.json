@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@capacitor/android": "^2.4.3",
     "@capacitor/core": "2.4.3",
     "@ionic/react": "^5.0.7",
     "@ionic/react-router": "^5.0.7",
@@ -21,6 +22,7 @@
     "antd-mobile": "^2.3.4",
     "ionicons": "^5.0.0",
     "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
