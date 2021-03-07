@@ -18,6 +18,7 @@ import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
 import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
+import "../theme/toolbar.css";
 
 const RegisterUser = () => {
 
@@ -58,10 +59,10 @@ const RegisterUser = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar >
-                       <IonTitle>
+                    <IonToolbar id={"toolbar"}>
+                       <IonTitle id={"letter"}>
                            <Link to={ Routes.LOGIN}>
-                               <IonIcon icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
+                               <IonIcon id={"icon"} icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
                            </Link>
                            Registro
                        </IonTitle>

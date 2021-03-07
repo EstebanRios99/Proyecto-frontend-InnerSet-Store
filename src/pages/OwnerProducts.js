@@ -7,6 +7,7 @@ import {
 } from "@ionic/react";
 import ProductOwnerList from "../components/ProductOwnerList";
 import Layouts from '../components/Layout';
+import "../theme/toolbar.css";
 
 const OwnerProductsPage = () => {
 
@@ -15,8 +16,8 @@ const OwnerProductsPage = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar >
-                        <IonTitle slot={"primary"}>Lista de Productos </IonTitle>
+                    <IonToolbar id={"toolbar"}>
+                        <IonTitle id={"letter"} slot={"primary"}>Lista de Productos </IonTitle>
                         <Layouts />
                     </IonToolbar>
                 </IonHeader>

@@ -15,6 +15,7 @@ import {useProduct} from "../data/useProduct";
 import {translateMessage} from "../utils/translateMessage";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
+import "../theme/toolbar.css";
 
 
 
@@ -43,7 +44,11 @@ const ProductOwnerList = () => {
         form.validateFields()
             .then( async( values ) => {
                 try {
-                    await API.put( `/products/${idProduct}`, values ); // post data to server
+                    await API.put( `/products/${idProduct}`, {
+                        name: values.name,
+                        stock: parseInt(product.product.stock) + parseInt(values.stock),
+                        price: values.price,
+                    } ); // post data to server
                     form.resetFields();
                     await afterCreate();
                     setShowInfo(false);
@@ -121,8 +126,9 @@ const ProductOwnerList = () => {
                                 </IonItem>
 
                                 <IonCardContent>
-                                    <IonCardSubtitle>{search.price}</IonCardSubtitle>
                                     <IonCardTitle>{search.name}</IonCardTitle>
+                                    <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Stock: </strong>{search.stock}</IonCardSubtitle>
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -138,8 +144,9 @@ const ProductOwnerList = () => {
                             </IonItem>
 
                         <IonCardContent>
-                            <IonCardSubtitle>{product.price}</IonCardSubtitle>
                             <IonCardTitle>{product.name}</IonCardTitle>
+                            <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Stock: </strong>{product.stock}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -157,8 +164,8 @@ const ProductOwnerList = () => {
                         <IonModal isOpen={showInfo} cssClass='my-custom-class'>
                             <IonPage>
                                 <IonHeader>
-                                    <IonToolbar >
-                                        <IonTitle>
+                                    <IonToolbar id={"toolbar"}>
+                                        <IonTitle id={"letter"}>
                                             Detalle del producto
                                         </IonTitle>
                                     </IonToolbar>
@@ -177,34 +184,16 @@ const ProductOwnerList = () => {
                                     onFinish={onUpdate}
                                 >
                                     <Form.Item name='name'
-                                               rules={[
-                                                   {
-                                                       required: true,
-                                                       message: 'Ingresa nombre del producto'
-                                                   }
-                                               ]}
                                                hasFeedback
                                      >
                                         <Input  placeholder={product.product.name}/>
                                     </Form.Item>
                                     <Form.Item name='stock'
-                                               rules={[
-                                                   {
-                                                       required: true,
-                                                       message: 'Ingresa el stock o la cantidad del producto'
-                                                   },
-                                               ]}
                                                hasFeedback
                                     >
                                         <Input  placeholder={product.product.stock}/>
                                     </Form.Item>
                                     <Form.Item name='price'
-                                               rules={[
-                                                   {
-                                                       required: true,
-                                                       message: 'Ingresa el precio del producto'
-                                                   }
-                                               ]}
                                                hasFeedback
                                     >
                                         <Input  placeholder={product.product.price}/>

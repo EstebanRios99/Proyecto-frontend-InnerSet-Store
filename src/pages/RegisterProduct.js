@@ -12,6 +12,7 @@ import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {useCategories} from "../data/useCategories";
+import "../theme/toolbar.css";
 
 
 const { Option } = Select;
@@ -137,10 +138,10 @@ const RegisterProduct = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar >
-                       <IonTitle>
+                    <IonToolbar id={"toolbar"}>
+                       <IonTitle id={"letter"}>
                            <Link to={ Routes.OWNERPRODUCTS}>
-                               <IonIcon icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
+                               <IonIcon id={"icon"} icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
                            </Link>
                            Registro de productos
                        </IonTitle>
