@@ -27,7 +27,7 @@ const AsyncClientProducts = loadable(() => import( '../pages/ClientProducts' ), 
 const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);
 const AsyncRegister = loadable(() => import ('../pages/RegisterUser'),loadableOptions);
 const AsyncRegisterProduct = loadable(() => import ('../pages/RegisterProduct'),loadableOptions);
-const AsyncDailyOrder = loadable(() => import('../pages/DailyOrders' ), loadableOptions);
+const AsyncDailyOrder = loadable(() => import('../pages/DailyOrdersClient' ), loadableOptions);
 const AsyncAbout = loadable(() => import( '../pages/About' ), loadableOptions);
 const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions);
 const AsyncProfile = loadable(() => import( '../pages/Profile' ), loadableOptions);

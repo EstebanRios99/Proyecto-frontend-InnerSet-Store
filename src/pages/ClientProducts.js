@@ -1,28 +1,27 @@
 import React, {useState} from 'react';
 import {
     IonHeader,
-    IonIcon,
+    IonItem,
     IonPage,
     IonTitle,
     IonToolbar,
-    IonButtons,
-    IonMenuButton, IonSearchbar
+    IonProgressBar
 } from "@ionic/react";
-import {logOut} from "ionicons/icons";
 import ProductClientList from "../components/ProductClientList";
-import {Link} from "react-router-dom";
-import Routes from "../constants/routes";
 import Layouts from "../components/Layout";
+import "../theme/toolbar.css";
 
 
 const ClientProductsPage = () => {
+
+    const status="delivered";
 
     return    (
         <>
         <IonPage>
             <IonHeader >
-                <IonToolbar>
-                    <IonTitle slot={"primary"}> Lista de Productos</IonTitle>
+                <IonToolbar id={"toolbar"}>
+                    <IonTitle id={"letter"} slot={"primary"}> Lista de Productos</IonTitle>
                     <Layouts />
                 </IonToolbar>
             </IonHeader>
