@@ -17,8 +17,10 @@ const DailyOrdersClient = () => {
         <IonPage>
           <IonHeader >
             <IonToolbar id={"toolbar"}>
-              <IonTitle id={"letter"} slot={"primary"}> Lista de Pedidos</IonTitle>
-              <Layouts />
+              <IonTitle id={"letter"} > Lista de Pedidos</IonTitle>
+                <div slot={"start"} className="menu">
+                    <Layouts />
+                </div>
             </IonToolbar>
           </IonHeader>
         </IonPage>

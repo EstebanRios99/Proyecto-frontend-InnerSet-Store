@@ -6,7 +6,7 @@ import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
@@ -140,10 +140,16 @@ const RegisterProduct = () => {
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
                        <IonTitle id={"letter"}>
-                           <Link to={ Routes.OWNERPRODUCTS}>
-                               <IonIcon id={"icon"} icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
-                           </Link>
-                           Registro de productos
+                           <IonRow>
+                               <IonCol size={2}>
+                                   <Link to={ Routes.OWNERPRODUCTS}>
+                                       <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
+                                   </Link>
+                               </IonCol>
+                               <IonCol size={2}>
+                                   Registro de productos
+                               </IonCol>
+                           </IonRow>
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>

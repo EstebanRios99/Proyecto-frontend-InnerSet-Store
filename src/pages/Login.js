@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { translateMessage } from '../utils/translateMessage';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
+import '../styles/login.css';
 import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
 import '../theme/toolbar.css';
 import {Link} from "react-router-dom";

@@ -9,7 +9,7 @@ import {
     IonCardTitle, IonCol, IonGrid, IonHeader, IonText,
     IonItem, IonModal, IonPage,
     IonRow, IonTitle, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -242,13 +242,13 @@ const ProductClientList = () => {
                         searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
                             <IonCol  size="6">
                                 <IonCard key={i} onClick={()=>addCart(search)} >
-                                    <IonItem >
-                                        <img src={ `http://localhost:8000/storage/${ search.image }` }
-                                             style={{height: "100px", width:"100px", align: "center"}}/>
-                                    </IonItem>
+                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                            style={{height: "100px"}}/>
+                                    <IonCardHeader>
+                                        <IonCardTitle>{search.name}</IonCardTitle>
+                                    </IonCardHeader>
 
                                     <IonCardContent>
-                                        <IonCardTitle>{search.name}</IonCardTitle>
                                         <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
                                     </IonCardContent>
                                 </IonCard>
@@ -259,13 +259,12 @@ const ProductClientList = () => {
                     products.filter(i => i.stock  > 0).map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>addCart(product)} >
-                            <IonItem >
-                                <img src={ `http://localhost:8000/storage/${ product.image }` }
-                                     style={{height: "100px", width:"100px", align: "center"}}/>
-                            </IonItem>
-
-                        <IonCardContent>
+                        <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                        />
+                        <IonCardHeader>
                             <IonCardTitle>{product.name}</IonCardTitle>
+                        </IonCardHeader>
+                        <IonCardContent>
                             <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>

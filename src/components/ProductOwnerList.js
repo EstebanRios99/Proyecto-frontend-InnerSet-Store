@@ -4,11 +4,11 @@ import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonButton,
-    IonCard, IonCardContent,
+    IonCard, IonCardContent, IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader,
-    IonItem,IonModal, IonPage,
-    IonRow, IonTitle, IonToolbar,
+    IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
+    IonItem, IonModal, IonPage,
+    IonRow, IonThumbnail, IonTitle, IonToolbar,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
@@ -120,13 +120,13 @@ const ProductOwnerList = () => {
                     searchProduct.map((search, i)=>(
                         <IonCol  size="6">
                             <IonCard key={i} onClick={()=>showDetail(search.id)} >
-                                <IonItem >
-                                    <img src={ `http://localhost:8000/storage/${ search.image }` }
-                                         style={{height: "100px", width:"100px", align: "center"}}/>
-                                </IonItem>
+                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px"}}/>
+                                         <IonCardHeader>
+                                             <IonCardTitle>{search.name}</IonCardTitle>
+                                         </IonCardHeader>
 
                                 <IonCardContent>
-                                    <IonCardTitle>{search.name}</IonCardTitle>
                                     <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Stock: </strong>{search.stock}</IonCardSubtitle>
                                 </IonCardContent>
@@ -138,13 +138,13 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
-                            <IonItem >
-                                <img src={ `http://localhost:8000/storage/${ product.image }` }
-                                     style={{height: "100px", width:"100px", align: "center"}}/>
-                            </IonItem>
+                                <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                                     />
+                        <IonCardHeader>
+                            <IonCardTitle>{product.name}</IonCardTitle>
+                        </IonCardHeader>
 
                         <IonCardContent>
-                            <IonCardTitle>{product.name}</IonCardTitle>
                             <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Stock: </strong>{product.stock}</IonCardSubtitle>
                         </IonCardContent>
@@ -170,11 +170,18 @@ const ProductOwnerList = () => {
                                         </IonTitle>
                                     </IonToolbar>
                                 </IonHeader>
-
-                                    <IonItem>
-                                        <img src={ `http://localhost:8000/storage/${ product.product.image }` }
-                                             style={{height: "100px", width:"100px", align: "center"}}/>
-                                    </IonItem>
+                                <IonRow>
+                                    <IonCol/>
+                                    <IonCol>
+                                        <IonItem>
+                                            <IonThumbnail style={{width: "100px", height:"100px"}}>
+                                                <IonImg src={ `http://localhost:8000/storage/${ product.product.image }` }
+                                                />
+                                            </IonThumbnail>
+                                        </IonItem>
+                                    </IonCol>
+                                    <IonCol/>
+                                </IonRow>
 
                                 <Form
                                     form={form}
@@ -198,11 +205,17 @@ const ProductOwnerList = () => {
                                     >
                                         <Input  placeholder={product.product.price}/>
                                     </Form.Item>
+                                    <IonRow>
+                                        <IonCol>
                                     <IonButton type='primary' htmlType='submit' className='login-form-button'>
                                         Actualizar Producto
                                     </IonButton>
+                                        </IonCol>
+                                        <IonCol>
+                                    <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
+                                        </IonCol>
+                                    </IonRow>
                                 </Form>
-                                <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                             </IonPage>
                         </IonModal>
                     </>
