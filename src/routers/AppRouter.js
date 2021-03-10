@@ -32,6 +32,7 @@ const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions)
 const AsyncProfile = loadable(() => import( '../pages/Profile' ), loadableOptions);
 const AsyncEmail = loadable(() => import( '../pages/Email' ), loadableOptions);
 const AsyncNewOrder = loadable(() => import('../pages/NewOrders'), loadableOptions);
+const AsyncReports = loadable(() => import('../pages/Reports'), loadableOptions);
 
 /**
  * Este es el componente que se encarga de renderizar el componente adecuado
@@ -62,6 +63,7 @@ const AppRouter = () => (
         <PrivateRoute path={Routes.LOGOUT} component={AsyncLogout}/>
         <PrivateRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
         <PrivateRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
+        <PrivateRoute path={Routes.REPORTS} component={AsyncReports}/>
 
         <Route component={NotFoundPage}/>
     </Switch>

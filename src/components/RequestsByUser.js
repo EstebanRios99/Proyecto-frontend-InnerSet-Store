@@ -70,7 +70,7 @@ const RequestsByUser = () => {
     return (
       <>
           <IonList>
-              {
+              { requestsByUser ?
                   requestsByUser.map( ( requests, i ) => (
                   <IonItem key={i} onClick={()=>handleShowDetail(i)}>
                        <IonLabel>
@@ -100,6 +100,7 @@ const RequestsByUser = () => {
                       </IonLabel>
                   </IonItem>
               ))
+                  : ""
           }
           </IonList>
 
@@ -128,7 +129,7 @@ const RequestsByUser = () => {
                       </IonList>
                   </>
                   : request.isError
-                  ? <ShowError error={request.isError}/>
+                  ? ""
                   : <>
                       <IonModal isOpen={showDetail} cssClass='my-custom-class'>
                           <IonPage>

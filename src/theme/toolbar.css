@@ -7,3 +7,9 @@
 #icon{
     color: #ffffff;
 }
+#btn{
+    --background: #92949c;
+}
+#text{
+    color: #ffffff;
+}
