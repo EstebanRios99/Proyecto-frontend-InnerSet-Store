@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row, Col, Skeleton, Form, Input, message} from "antd";
+import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
 import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
@@ -161,15 +161,16 @@ const ProductOwnerList = () => {
                     : product.isError
                     ? <ShowError error={product.isError}/>
                     : <>
-                        <IonModal isOpen={showInfo} cssClass='my-custom-class'>
-                            <IonPage>
-                                <IonHeader>
-                                    <IonToolbar id={"toolbar"}>
-                                        <IonTitle id={"letter"}>
-                                            Detalle del producto
-                                        </IonTitle>
-                                    </IonToolbar>
-                                </IonHeader>
+                        <Modal  title="Producto" style={{background:"blue"}}
+                                visible={showInfo}
+                                closable={false}
+                                footer={[
+                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
+                                        Actualizar
+                                    </IonButton>,
+                                    <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
+                                ]}
+                        >
                                 <IonRow>
                                     <IonCol/>
                                     <IonCol>
@@ -188,7 +189,7 @@ const ProductOwnerList = () => {
                                     initialValues={{
                                         remember: true,
                                     }}
-                                    onFinish={onUpdate}
+                                    //onFinish={onUpdate}
                                 >
                                     <Form.Item name='name'
                                                hasFeedback
@@ -205,19 +206,8 @@ const ProductOwnerList = () => {
                                     >
                                         <Input  placeholder={product.product.price}/>
                                     </Form.Item>
-                                    <IonRow>
-                                        <IonCol>
-                                    <IonButton type='primary' htmlType='submit' className='login-form-button'>
-                                        Actualizar Producto
-                                    </IonButton>
-                                        </IonCol>
-                                        <IonCol>
-                                    <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
-                                        </IonCol>
-                                    </IonRow>
                                 </Form>
-                            </IonPage>
-                        </IonModal>
+                        </Modal>
                     </>
             }
         </>
