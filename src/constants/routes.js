@@ -4,7 +4,6 @@ const publicRoutes = {
   USERS: '/usuarios',
   USERS_ID: `/usuario/:id`,
   //HOME: '/',
-  ANTD: '/antd',
   EMAIL: '/activacion',
 };
 
@@ -17,6 +16,7 @@ const privateRoutes = {
   DAILYORDER: '/daily-order',
   PROFILE: '/profile',
   NEWORDER: '/neworder',
+  REPORTS: '/reports',
   
 };
 

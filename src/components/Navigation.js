@@ -83,8 +83,8 @@ const Navigation = (props) => {
                 ?   <><Menu.Item key={Routes.NEWORDER} icon={<NotificationOutlined/>} >
                         <Link to={Routes.NEWORDER} style={linkStyle}>Órdenes Nuevas</Link>
                     </Menu.Item>
-                    <Menu.Item key={Routes.ANTD} icon={<MonitorOutlined/>} >
-                        <Link to={Routes.ANTD} style={linkStyle}>Reportes de Ventas</Link>
+                    <Menu.Item key={Routes.REPORTS} icon={<MonitorOutlined/>} >
+                        <Link to={Routes.REPORTS} style={linkStyle}>Reportes de Ventas</Link>
                     </Menu.Item>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
