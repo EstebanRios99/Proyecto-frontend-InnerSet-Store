@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, Form, InputNumber, Select} from "antd";
+import {Row,Col, Skeleton, Form, InputNumber, Modal} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
@@ -19,6 +19,7 @@ import API from "../data";
 import {useRequests} from "../data/useRequests";
 import {useRequestsByUser} from "../data/useRequestsByUser";
 import "../theme/toolbar.css";
+
 
 const ProductClientList = () => {
 
@@ -274,16 +275,14 @@ const ProductClientList = () => {
                 </IonRow>
             </IonGrid>
 
-            <IonModal cssClass='my-custom-class' isOpen={showCart}>
-                <IonPage>
-                    <IonHeader>
-                        <IonToolbar id={"toolbar"}>
-                            <IonTitle id={"letter"}>
-                                Carrito de compra
-                            </IonTitle>
-                        </IonToolbar>
-                    </IonHeader>
-
+            <Modal  title="Carrito de compras"
+                    visible={showCart}
+                    closable={false}
+                    footer={[
+                        <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>,
+                        <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
+                    ]}
+            >
                     <IonList>
                         {
                          cart.map((car,i)=>(
@@ -292,14 +291,16 @@ const ProductClientList = () => {
                                     <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
                                 </IonAvatar>
                                 <IonLabel>
-                                    <p>{car.cartName}</p>
-                                    <InputNumber
+                                    <IonRow>
+                                    <IonCol>{car.cartName}</IonCol>
+                                    <IonCol><InputNumber
                                         id={car.cartName.split(" ").join("")}
                                         defaultValue={car.cartQuantity}
                                         min={1}
                                         max={10}
-                                        style={{width:"50px"}}/>
-                                    <p>{car.cartPrice.toFixed(2)}</p>
+                                        style={{width:"50px"}}/></IonCol>
+                                    <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
+                                    </IonRow>
                                 </IonLabel>
                                 <IonIcon
                                     icon={arrowUpCircleOutline}
@@ -353,13 +354,7 @@ const ProductClientList = () => {
                                     : total.toFixed(2)
                         }</p></div></IonLabel>
                     </IonItem>
-                     <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>
-
-
-                    <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
-
-                </IonPage>
-            </IonModal>
+            </Modal>
             <IonAlert
                 isOpen={showAlert1}
                 onDidDismiss={()=>setShowAlert1(false)}
