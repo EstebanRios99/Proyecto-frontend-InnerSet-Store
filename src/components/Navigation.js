@@ -4,10 +4,10 @@ import {useAuth} from '../providers/Auth';
 import {Menu} from 'antd';
 import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, NotificationOutlined, UserOutlined, MonitorOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
-import '../styles/navigation.css';
-import '../styles/app.css';
+import '../theme/navigation.css';
+import '../theme/app.css';
+import user from '../images/editar.svg';
 import {
-    IonNote,
     IonAvatar,
     IonItem,
     IonLabel,
@@ -56,7 +56,7 @@ const Navigation = (props) => {
             >
                 <IonItem>
                     <IonAvatar slot="end">
-                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                        <img src={user} />
                     </IonAvatar>
                     <IonLabel>
                         <h3>{currentUser.name}</h3>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../providers/Auth';
 import {  Form, Input, message } from 'antd';
-import { LockOutlined, UserOutlined, EyeTwoTone, EyeInvisibleOutlined, MailOutlined } from '@ant-design/icons/lib';
+import { LockOutlined, EyeTwoTone, EyeInvisibleOutlined, MailOutlined } from '@ant-design/icons/lib';
 import API from '../data';
 import withoutAuth from '../hocs/withoutAuth';
 import Cookies from 'js-cookie';
@@ -14,6 +14,7 @@ import '../theme/toolbar.css';
 import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
 import logo from '../images/logo-inner.PNG';
+import '../theme/login.css';
 
 
 const Login = () => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     IonHeader,
     IonPage,
@@ -7,7 +7,7 @@ import {
 } from "@ionic/react";
 import ProductOwnerList from "../components/ProductOwnerList";
 import Layouts from '../components/Layout';
-import '../styles/app.css';
+import '../theme/app.css';
 import "../theme/toolbar.css";
 
 const OwnerProductsPage = () => {

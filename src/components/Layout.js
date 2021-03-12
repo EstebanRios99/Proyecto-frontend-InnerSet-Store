@@ -1,8 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import {Col, Popover, Button} from 'antd';
-import {useAuth} from "../providers/Auth";
-import '../styles/app.css';
+import '../theme/app.css';
 
 
 
@@ -17,7 +16,7 @@ import '../styles/app.css';
  */
 const MainLayout = props => {
     console.log('props', props);
-    const {isAuthenticated} = useAuth();
+
     return (
 
       <Col xs={ 2 } align='right' className='responsive-menu-button'>

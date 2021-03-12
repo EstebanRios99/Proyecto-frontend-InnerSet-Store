@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     IonHeader,
-    IonItem,
     IonPage,
     IonTitle,
-    IonToolbar,
-    IonProgressBar
+    IonToolbar
 } from "@ionic/react";
 import ProductClientList from "../components/ProductClientList";
-import '../styles/app.css';
+import '../theme/app.css';
 import Layouts from '../components/Layout';
 import '../theme/toolbar.css';
 
@@ -16,7 +14,6 @@ import '../theme/toolbar.css';
 
 const ClientProductsPage = () => {
 
-    const status="delivered";
 
     return    (
         <>

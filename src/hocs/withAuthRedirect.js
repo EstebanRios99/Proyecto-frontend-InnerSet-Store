@@ -4,7 +4,7 @@
 import { useAuth } from '../providers/Auth';
 import Loading from '../components/Loading';
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Routes from '../constants/routes';
 
 /**

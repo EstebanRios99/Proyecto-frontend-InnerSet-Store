@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
-import {arrowUpCircleOutline, car, cartOutline, home, trashOutline} from "ionicons/icons";
+import {arrowUpCircleOutline, cartOutline, trashOutline} from "ionicons/icons";
 import moment from 'moment';
 import API from "../data";
 import {useRequests} from "../data/useRequests";

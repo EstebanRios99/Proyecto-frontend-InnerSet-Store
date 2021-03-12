@@ -12,7 +12,7 @@ import {
 import logo from '../images/logo-inner.PNG';
 import {Link} from 'react-router-dom';
 import Routes from '../constants/routes';
-import '../styles/app.css';
+import '../theme/app.css';
 import {mailUnreadOutline} from "ionicons/icons";
 
 const EmailPage = () => (

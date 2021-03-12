@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Routes from '../constants/routes';
 import API from '../data/index';
 import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
 import ErrorList from '../components/ErrorList';
@@ -13,6 +12,10 @@ import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {useCategories} from "../data/useCategories";
 import "../theme/toolbar.css";
+import Layouts from '../components/Layout';
+import '../theme/app.css';
+import '../theme/login.css';
+import viveres from '../images/viveres.jpg'
 
 
 const { Option } = Select;
@@ -140,21 +143,18 @@ const RegisterProduct = () => {
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
                        <IonTitle id={"letter"}>
-                           <IonRow>
-                               <IonCol size={2}>
-                                   <Link to={ Routes.OWNERPRODUCTS}>
-                                       <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
-                                   </Link>
-                               </IonCol>
-                               <IonCol size={2}>
-                                   Registro de productos
-                               </IonCol>
-                           </IonRow>
+                            <div slot={"start"} className="menu">
+                                <Layouts />
+                            </div>
+                            Registro de productos
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
-
+                <br/>
+                    <IonImg src={viveres} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
+                <br/>
                     <Form
+                        className='login-form'
                         form={form}
                           initialValues={{
                               remember: true,
