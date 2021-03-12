@@ -24,6 +24,7 @@ const DailyOrdersClient = () => {
           </IonHeader>
         </IonPage>
         <RequestsByUser />
+
       </>
   )
 };

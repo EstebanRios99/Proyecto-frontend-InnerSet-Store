@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, InputNumber} from "antd";
+import {Row,Col, Skeleton, Form, InputNumber, Modal} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
@@ -9,7 +9,7 @@ import {
     IonCardTitle, IonCol, IonGrid, IonHeader, IonText,
     IonItem, IonModal, IonPage,
     IonRow, IonTitle, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -19,6 +19,7 @@ import API from "../data";
 import {useRequests} from "../data/useRequests";
 import {useRequestsByUser} from "../data/useRequestsByUser";
 import "../theme/toolbar.css";
+
 
 const ProductClientList = () => {
 
@@ -242,13 +243,13 @@ const ProductClientList = () => {
                         searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
                             <IonCol  size="6">
                                 <IonCard key={i} onClick={()=>addCart(search)} >
-                                    <IonItem >
-                                        <img src={ `http://localhost:8000/storage/${ search.image }` }
-                                             style={{height: "100px", width:"100px", align: "center"}}/>
-                                    </IonItem>
+                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                            style={{height: "100px"}}/>
+                                    <IonCardHeader>
+                                        <IonCardTitle>{search.name}</IonCardTitle>
+                                    </IonCardHeader>
 
                                     <IonCardContent>
-                                        <IonCardTitle>{search.name}</IonCardTitle>
                                         <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
                                     </IonCardContent>
                                 </IonCard>
@@ -259,13 +260,12 @@ const ProductClientList = () => {
                     products.filter(i => i.stock  > 0).map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>addCart(product)} >
-                            <IonItem >
-                                <img src={ `http://localhost:8000/storage/${ product.image }` }
-                                     style={{height: "100px", width:"100px", align: "center"}}/>
-                            </IonItem>
-
-                        <IonCardContent>
+                        <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                        />
+                        <IonCardHeader>
                             <IonCardTitle>{product.name}</IonCardTitle>
+                        </IonCardHeader>
+                        <IonCardContent>
                             <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
@@ -275,16 +275,14 @@ const ProductClientList = () => {
                 </IonRow>
             </IonGrid>
 
-            <IonModal cssClass='my-custom-class' isOpen={showCart}>
-                <IonPage>
-                    <IonHeader>
-                        <IonToolbar id={"toolbar"}>
-                            <IonTitle id={"letter"}>
-                                Carrito de compra
-                            </IonTitle>
-                        </IonToolbar>
-                    </IonHeader>
-
+            <Modal  title="Carrito de compras"
+                    visible={showCart}
+                    closable={false}
+                    footer={[
+                        <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>,
+                        <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
+                    ]}
+            >
                     <IonList>
                         {
                          cart.map((car,i)=>(
@@ -293,14 +291,16 @@ const ProductClientList = () => {
                                     <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
                                 </IonAvatar>
                                 <IonLabel>
-                                    <p>{car.cartName}</p>
-                                    <InputNumber
+                                    <IonRow>
+                                    <IonCol>{car.cartName}</IonCol>
+                                    <IonCol><InputNumber
                                         id={car.cartName.split(" ").join("")}
                                         defaultValue={car.cartQuantity}
                                         min={1}
                                         max={10}
-                                        style={{width:"50px"}}/>
-                                    <p>{car.cartPrice.toFixed(2)}</p>
+                                        style={{width:"50px"}}/></IonCol>
+                                    <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
+                                    </IonRow>
                                 </IonLabel>
                                 <IonIcon
                                     icon={arrowUpCircleOutline}
@@ -354,12 +354,7 @@ const ProductClientList = () => {
                                     : total.toFixed(2)
                         }</p></div></IonLabel>
                     </IonItem>
-                    <div style={{display:"block", margin:"auto"}}>
-                    <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>
-                    <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
-                    </div>
-                </IonPage>
-            </IonModal>
+            </Modal>
             <IonAlert
                 isOpen={showAlert1}
                 onDidDismiss={()=>setShowAlert1(false)}

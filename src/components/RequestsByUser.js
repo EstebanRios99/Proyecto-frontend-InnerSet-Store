@@ -8,14 +8,14 @@ import {
     IonThumbnail,
     IonSkeletonText,
     IonProgressBar,
-    IonModal,
     IonPage, IonHeader, IonToolbar, IonTitle,
-    IonGrid, IonRow, IonCol, IonIcon
+    IonGrid, IonRow, IonCol, IonIcon, IonButton
 } from "@ionic/react";
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
 import {arrowBack} from "ionicons/icons";
 import "../theme/toolbar.css";
+import {Modal} from "antd";
 
 
 const RequestsByUser = () => {
@@ -70,7 +70,7 @@ const RequestsByUser = () => {
     return (
       <>
           <IonList>
-              {
+              { requestsByUser ?
                   requestsByUser.map( ( requests, i ) => (
                   <IonItem key={i} onClick={()=>handleShowDetail(i)}>
                        <IonLabel>
@@ -100,6 +100,7 @@ const RequestsByUser = () => {
                       </IonLabel>
                   </IonItem>
               ))
+                  : ""
           }
           </IonList>
 
@@ -128,24 +129,15 @@ const RequestsByUser = () => {
                       </IonList>
                   </>
                   : request.isError
-                  ? <ShowError error={request.isError}/>
+                  ? ""
                   : <>
-                      <IonModal isOpen={showDetail} cssClass='my-custom-class'>
-                          <IonPage>
-                              <IonHeader>
-                                  <IonToolbar id={"toolbar"}>
-                                          <IonIcon
-                                              id={"icon"}
-                                              icon={arrowBack}
-                                              slot="start"
-                                              style={{width:"25px", height:"25px"}}
-                                              onClick={()=>setShowDetail(false)}
-                                          />
-                                      <IonTitle id={"letter"}>
-                                          Detalle del pedido
-                                      </IonTitle>
-                                  </IonToolbar>
-                              </IonHeader>
+                      <Modal  title="Detalle del pedido" id={"modal"}
+                              visible={showDetail}
+                              closable={false}
+                              footer={[
+                                  <IonButton onClick={()=>setShowDetail(false)}>Cerrar</IonButton>
+                              ]}
+                      >
                               <IonGrid>
                                   <IonRow>
                                       <IonCol><strong>N° de Pedido: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
@@ -256,8 +248,7 @@ const RequestsByUser = () => {
                                       </IonList>
                                       </>
                               }
-                          </IonPage>
-                      </IonModal>
+                      </Modal>
                       </>
           }
       </>

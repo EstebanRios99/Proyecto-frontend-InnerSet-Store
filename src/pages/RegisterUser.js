@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {useAuth} from '../providers/Auth';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
-import {IonButton, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {IonButton, IonCol, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar} from "@ionic/react";
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
 import logo from '../images/logo-inner.PNG';
@@ -63,10 +63,16 @@ const RegisterUser = () => {
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
                        <IonTitle className="iontitle" id={"letter"}>
-                            <Link to={ Routes.LOGIN}>
-                                <IonIcon icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
-                            </Link>
-                           Registro
+                           <IonRow>
+                               <IonCol size={2}>
+                                   <Link to={ Routes.LOGIN}>
+                                        <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
+                                    </Link>
+                               </IonCol>
+                               <IonCol size={2}>
+                                    Registro
+                               </IonCol>
+                           </IonRow>
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
