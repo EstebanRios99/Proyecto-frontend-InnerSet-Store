@@ -10,7 +10,6 @@ import {
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import withoutAuth from '../hocs/withoutAuth';
-import '../styles/register.css';
 import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {useAuth} from '../providers/Auth';
@@ -20,6 +19,7 @@ import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
 import logo from '../images/logo-inner.PNG';
 import "../theme/toolbar.css";
+import '../theme/register.css';
 
 
 const RegisterUser = () => {

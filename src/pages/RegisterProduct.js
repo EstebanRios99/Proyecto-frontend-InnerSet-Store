@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import Routes from '../constants/routes';
 import API from '../data/index';
 import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
-import '../styles/register.css';
-import {Link} from 'react-router-dom';
-import {IonButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/react";
-import {arrowBack} from "ionicons/icons";
+import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {useCategories} from "../data/useCategories";
 import "../theme/toolbar.css";
+import Layouts from '../components/Layout';
+import '../theme/app.css';
+import '../theme/login.css';
+import viveres from '../images/viveres.jpg'
 
 
 const { Option } = Select;
@@ -140,15 +140,18 @@ const RegisterProduct = () => {
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
                        <IonTitle id={"letter"}>
-                           <Link to={ Routes.OWNERPRODUCTS}>
-                               <IonIcon id={"icon"} icon={arrowBack} slot="start"  style={{width:"25px", height:"25px"}}/>
-                           </Link>
-                           Registro de productos
+                            <div slot={"start"} className="menu">
+                                <Layouts />
+                            </div>
+                            Registro de productos
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
-
+                <br/>
+                    <IonImg src={viveres} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
+                <br/>
                     <Form
+                        className='login-form'
                         form={form}
                           initialValues={{
                               remember: true,

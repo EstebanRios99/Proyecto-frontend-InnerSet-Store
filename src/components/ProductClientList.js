@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, Form, InputNumber, Select} from "antd";
+import {Row,Col, Skeleton, InputNumber} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
-import {arrowUpCircleOutline, car, cartOutline, home, trashOutline} from "ionicons/icons";
+import {arrowUpCircleOutline, cartOutline, trashOutline} from "ionicons/icons";
 import moment from 'moment';
 import API from "../data";
 import {useRequests} from "../data/useRequests";
@@ -354,11 +354,10 @@ const ProductClientList = () => {
                                     : total.toFixed(2)
                         }</p></div></IonLabel>
                     </IonItem>
-                     <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>
-
-
+                    <div style={{display:"block", margin:"auto"}}>
+                    <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>
                     <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
-
+                    </div>
                 </IonPage>
             </IonModal>
             <IonAlert

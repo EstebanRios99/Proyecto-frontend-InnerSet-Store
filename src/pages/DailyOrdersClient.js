@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   IonHeader,
-  IonItem,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -17,8 +16,10 @@ const DailyOrdersClient = () => {
         <IonPage>
           <IonHeader >
             <IonToolbar id={"toolbar"}>
+              <div slot={"start"} className="menu">
+                <Layouts />
+              </div>
               <IonTitle id={"letter"} slot={"primary"}> Lista de Pedidos</IonTitle>
-              <Layouts />
             </IonToolbar>
           </IonHeader>
         </IonPage>

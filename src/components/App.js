@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import AppRouter from '../routers/AppRouter';
 import history from '../utils/history';
 import 'antd/dist/antd.css';
-import '../styles/app.css';
+import '../theme/app.css';
 import '../theme/variables.css';
 
 /**
