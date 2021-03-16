@@ -144,6 +144,7 @@ const RegisterProduct = () => {
                         <div slot={"start"} className="menu">
                             <Layouts />
                         </div>
+
                        <IonTitle id={"letter"}>Registro de productos</IonTitle>
                     </IonToolbar>
                 </IonHeader>
@@ -215,7 +216,7 @@ const RegisterProduct = () => {
                         </Form.Item>
 
                         <Form.Item name='image'
-                                   label='Upload'
+                                   label='Imagen'
                                    valuePropName='fileList'
                                    getValueFromEvent={ normPhotoFile }
                                    rules={ [
@@ -237,7 +238,7 @@ const RegisterProduct = () => {
                                     ? <img src={ imageUrl } alt='Foto' style={ { width: '80px' } } />
                                     : <div>
                                         <PlusOutlined />
-                                        <div className='ant-upload-text'>Upload</div>
+                                        <div className='ant-upload-text'>Subir imagen</div>
                                     </div> }
                             </Upload>
                         </Form.Item>

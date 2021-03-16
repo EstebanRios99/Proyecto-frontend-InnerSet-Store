@@ -83,7 +83,7 @@ const Login = () => {
             >
 
                 <Input prefix={ <MailOutlined className='site-form-item-icon' /> }
-                        placeholder='Email'
+                        placeholder='Correo'
                         autoComplete='email'/>
             </Form.Item>
 
@@ -99,7 +99,7 @@ const Login = () => {
                 <Input.Password
                     prefix={ <LockOutlined className='site-form-item-icon' /> }
                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                    placeholder='Password' autoComplete='password'
+                    placeholder='Contraseña' autoComplete='password'
                 />
             </Form.Item>
 

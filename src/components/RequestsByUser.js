@@ -14,6 +14,7 @@ import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
 import "../theme/toolbar.css";
 import {Modal} from "antd";
+import moment from "moment";
 
 
 const RequestsByUser = () => {
@@ -58,7 +59,7 @@ const RequestsByUser = () => {
     }
 
     const handleShowDetail=(index)=>{
-        const id=requestsByUser[index].id;
+        const id=index.id;
         setIdRequest(id);
         setShowDetail(true);
     }
@@ -69,8 +70,8 @@ const RequestsByUser = () => {
       <>
           <IonList>
               { requestsByUser ?
-                  requestsByUser.map( ( requests, i ) => (
-                  <IonItem key={i} onClick={()=>handleShowDetail(i)}>
+                  requestsByUser.filter(i => i.date  === moment().format('YYYY-MM-D')).map( ( requests, i ) => (
+                  <IonItem key={i} onClick={()=>handleShowDetail(requests)}>
                        <IonLabel>
                           <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
                           <div><p><strong>Total: </strong>{requests.total.toFixed(2)}</p></div>
@@ -133,7 +134,7 @@ const RequestsByUser = () => {
                               visible={showDetail}
                               closable={false}
                               footer={[
-                                  <IonButton onClick={()=>setShowDetail(false)}>Cerrar</IonButton>
+                                  <IonButton onClick={()=>setShowDetail(false)} size={"small"}>Cerrar</IonButton>
                               ]}
                       >
                               <IonGrid>
