@@ -1,14 +1,13 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, Form, InputNumber, Modal} from "antd";
+import {Row,Col, Skeleton, InputNumber, Modal} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonCard, IonCardContent,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonText,
-    IonItem, IonModal, IonPage,
-    IonRow, IonTitle, IonToolbar, IonIcon, IonButton,
+    IonCardTitle, IonCol, IonGrid, IonText, IonItem,
+    IonRow, IonToolbar, IonIcon, IonButton,
     IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";

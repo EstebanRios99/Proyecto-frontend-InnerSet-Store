@@ -3,10 +3,8 @@ import API from '../data/index';
 import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
-import '../styles/register.css';
-import {Link} from 'react-router-dom';
-import {IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar} from "@ionic/react";
-import {arrowBack} from "ionicons/icons";
+import '../theme/register.css';
+import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -124,6 +122,7 @@ const RegisterProduct = () => {
                 [...new Array(9)].map((_, i) =>
                     <Col xs={24} sm={12} md={8} style={{marginBottom: 30}} key={i}>
                         <div style={{textAlign: 'center'}}>
+                            <br/>
                             <Skeleton.Image style={{width: 200}}/>
                             <Card title='' extra='' cover='' loading/>
                         </div>
@@ -142,12 +141,10 @@ const RegisterProduct = () => {
             <IonPage>
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
-                       <IonTitle id={"letter"}>
-                            <div slot={"start"} className="menu">
-                                <Layouts />
-                            </div>
-                            Registro de productos
-                       </IonTitle>
+                        <div slot={"start"} className="menu">
+                            <Layouts />
+                        </div>
+                       <IonTitle id={"letter"}>Registro de productos</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <br/>

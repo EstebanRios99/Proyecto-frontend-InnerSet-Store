@@ -8,12 +8,10 @@ import {
     IonThumbnail,
     IonSkeletonText,
     IonProgressBar,
-    IonPage, IonHeader, IonToolbar, IonTitle,
-    IonGrid, IonRow, IonCol, IonIcon, IonButton
+    IonGrid, IonRow, IonCol, IonButton
 } from "@ionic/react";
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
-import {arrowBack} from "ionicons/icons";
 import "../theme/toolbar.css";
 import {Modal} from "antd";
 

@@ -1,14 +1,14 @@
 import {useProducts} from "../data/useProducts";
-import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
+import {Row, Col, Skeleton, Form, Input, message, Modal, Card} from "antd";
 import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonButton,
     IonCard, IonCardContent, IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
-    IonItem, IonModal, IonPage,
-    IonRow, IonThumbnail, IonTitle, IonToolbar,
+    IonCardTitle, IonCol, IonGrid, IonImg,
+    IonItem,
+    IonRow, IonThumbnail, IonToolbar,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
@@ -67,6 +67,7 @@ const ProductOwnerList = () => {
 
     };
 
+
     const afterCreate = async () => {
         await mutate('/products');
     };
@@ -82,8 +83,9 @@ const ProductOwnerList = () => {
                 [ ...new Array( 9 ) ].map( ( _, i ) =>
                     <Col xs={ 24 } sm={ 12 } md={ 8 } style={ { marginBottom: 30 } } key={ i }>
                         <div style={ { textAlign: 'center' } }>
+                            <br/>
                             <Skeleton.Image style={ { width: 200 } } />
-                            <IonCard title='' extra='' cover='' loading />
+                            <Card title='' extra='' cover='' loading />
                         </div>
                     </Col>
                 )
@@ -165,9 +167,7 @@ const ProductOwnerList = () => {
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
-                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
-                                        Actualizar
-                                    </IonButton>,
+                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>Actualizar</IonButton>,
                                     <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                                 ]}
                         >
@@ -185,25 +185,21 @@ const ProductOwnerList = () => {
                                 </IonRow>
 
                                 <Form
+                                    className="register-form"
+                                    layout="vertical"
                                     form={form}
                                     initialValues={{
                                         remember: true,
                                     }}
                                     //onFinish={onUpdate}
                                 >
-                                    <Form.Item name='name'
-                                               hasFeedback
-                                     >
+                                    <Form.Item label="Nombre Producto" name='name' hasFeedback>
                                         <Input  placeholder={product.product.name}/>
                                     </Form.Item>
-                                    <Form.Item name='stock'
-                                               hasFeedback
-                                    >
+                                    <Form.Item label="Stock" name='stock' hasFeedback>
                                         <Input  placeholder={product.product.stock}/>
                                     </Form.Item>
-                                    <Form.Item name='price'
-                                               hasFeedback
-                                    >
+                                    <Form.Item label="Precio" name='price' hasFeedback >
                                         <Input  placeholder={product.product.price}/>
                                     </Form.Item>
                                 </Form>

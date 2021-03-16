@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-    IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonDatetime,
+    IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonDatetime,
     IonGrid,
     IonHeader, IonImg, IonItem, IonLabel,
     IonPage, IonRow,
@@ -8,7 +8,7 @@ import {
     IonToolbar,
 } from "@ionic/react";
 import Layouts from '../components/Layout';
-import '../styles/app.css';
+import '../theme/app.css';
 import "../theme/toolbar.css";
 import moment from 'moment';
 import sale from '../images/ventas.png';
