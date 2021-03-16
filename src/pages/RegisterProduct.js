@@ -4,7 +4,7 @@ import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../theme/register.css';
-import {IonButton, IonHeader, IonPage,  IonImg,IonTitle, IonToolbar} from "@ionic/react";
+import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -122,6 +122,7 @@ const RegisterProduct = () => {
                 [...new Array(9)].map((_, i) =>
                     <Col xs={24} sm={12} md={8} style={{marginBottom: 30}} key={i}>
                         <div style={{textAlign: 'center'}}>
+                            <br/>
                             <Skeleton.Image style={{width: 200}}/>
                             <Card title='' extra='' cover='' loading/>
                         </div>
@@ -143,9 +144,8 @@ const RegisterProduct = () => {
                         <div slot={"start"} className="menu">
                             <Layouts />
                         </div>
-                       <IonTitle id={"letter"}>
-                            Registro de productos
-                       </IonTitle>
+
+                       <IonTitle id={"letter"}>Registro de productos</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <br/>

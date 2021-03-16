@@ -30,7 +30,7 @@ const Profile = () => {
                 </IonToolbar>
             </IonHeader>
           <IonCard>
-          <IonImg  src={user} style={{width:"150px", height:"150px"}}/>
+          <IonImg  src={user} style={{width:"150px", height:"150px", margin:'auto', display:'block'}}/>
           <IonCardHeader>
             <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
             <IonCardSubtitle>Correo:  {currentUser.email}</IonCardSubtitle>
