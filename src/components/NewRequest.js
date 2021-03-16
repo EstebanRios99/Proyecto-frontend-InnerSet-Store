@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import API from '../data/index';
+import React, {useState} from 'react';
 import {useRequests} from '../data/useRequests';
 import ShowError from "./ShowError";
 import {
     IonList,
     IonItem,
-    IonLabel, IonFooter,
+    IonLabel,
     IonModal, IonButton,
     IonPage, IonHeader, IonToolbar, IonTitle,
     IonGrid, IonRow, IonCol, IonIcon

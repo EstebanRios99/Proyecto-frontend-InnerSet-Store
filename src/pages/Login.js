@@ -8,7 +8,6 @@ import Cookies from 'js-cookie';
 import { translateMessage } from '../utils/translateMessage';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
-import '../styles/login.css';
 import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
 import '../theme/toolbar.css';
 import {Link} from "react-router-dom";
@@ -83,7 +82,7 @@ const Login = () => {
             >
 
                 <Input prefix={ <MailOutlined className='site-form-item-icon' /> }
-                        placeholder='Email'
+                        placeholder='Correo'
                         autoComplete='email'/>
             </Form.Item>
 
@@ -99,7 +98,7 @@ const Login = () => {
                 <Input.Password
                     prefix={ <LockOutlined className='site-form-item-icon' /> }
                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                    placeholder='Password' autoComplete='password'
+                    placeholder='Contraseña' autoComplete='password'
                 />
             </Form.Item>
 

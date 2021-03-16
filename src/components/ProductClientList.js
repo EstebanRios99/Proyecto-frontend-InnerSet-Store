@@ -1,19 +1,19 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, Form, InputNumber, Modal} from "antd";
+import {Row,Col, Skeleton, InputNumber, Modal} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonCard, IonCardContent,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonText,
-    IonItem, IonModal, IonPage,
-    IonRow, IonTitle, IonToolbar, IonIcon, IonButton,
+    IonCardTitle, IonCol, IonGrid, IonText,
+    IonItem,
+    IonRow, IonToolbar, IonIcon, IonButton,
     IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
-import {arrowUpCircleOutline, cartOutline, trashOutline} from "ionicons/icons";
+import {addCircleOutline, arrowUpCircleOutline, cartOutline, trashOutline} from "ionicons/icons";
 import moment from 'moment';
 import API from "../data";
 import {useRequests} from "../data/useRequests";
@@ -39,6 +39,8 @@ const ProductClientList = () => {
     const [total, setTotal] = useState(0);
     const [showAlert1, setShowAlert1] = useState(false);
     const [showAlert2, setShowAlert2] = useState(false);
+    const [showAlert3, setShowAlert3] = useState(false);
+    const [showAlert4, setShowAlert4] = useState(false);
 
     console.log('search', searchProduct);
 
@@ -157,22 +159,26 @@ const ProductClientList = () => {
                             }
                         }
                         else{
-                            try {
-                                const surcharge=0;
-                                const total=subtotal;
-                                await API.post( '/requests', {
-                                    date :moment().format('YYYY-MM-D'),
-                                    subtotal: subtotal,
-                                    type: type,
-                                    surcharge: surcharge,
-                                    total: total,
-                                }); // post data to server
-                                await afterCreate();
-                            } catch( error ) {
-                                console.error(
-                                    'You have an error in your code or there are Network issues.',
-                                    error
-                                );
+                            if (type==="withdraw"){
+                                try {
+                                    const surcharge=0;
+                                    const total=subtotal;
+                                    await API.post( '/requests', {
+                                        date :moment().format('YYYY-MM-D'),
+                                        subtotal: subtotal,
+                                        type: type,
+                                        surcharge: surcharge,
+                                        total: total,
+                                    }); // post data to server
+                                    await afterCreate();
+                                } catch( error ) {
+                                    console.error(
+                                        'You have an error in your code or there are Network issues.',
+                                        error
+                                    );
+                                }
+                            }else{
+                                setShowAlert4(true);
                             }
                         }
                         if (isLoadingRequest){
@@ -203,12 +209,16 @@ const ProductClientList = () => {
                         }
                         setShowCart(false);
                         setCart([]);
+                        setType();
+                        setShowAlert3(true);
                     }
                     else{
                         setShowAlert2(true);
+                        setType();
                     }
         }else{
             setShowAlert1(true);
+            setType();
         }
     }
 
@@ -231,26 +241,30 @@ const ProductClientList = () => {
 
     return (
         <>
-            <IonGrid>
-                <IonRow>
+
                     <IonToolbar>
-                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
+                        <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
                         <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
                     </IonToolbar>
+                <IonRow>
 
             {
                 searchProduct ?
                         searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
-                            <IonCol  size="6">
-                                <IonCard key={i} onClick={()=>addCart(search)} >
+                            <IonCol  size={"6"}>
+                                <IonCard key={i}>
                                     <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
                                             style={{height: "100px"}}/>
-                                    <IonCardHeader>
-                                        <IonCardTitle>{search.name}</IonCardTitle>
-                                    </IonCardHeader>
-
                                     <IonCardContent>
-                                        <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
+                                        <IonCardTitle><p>{search.name}</p></IonCardTitle>
+                                        <IonCardSubtitle><p>{search.price.toFixed(2)}</p>
+                                            <p align={"right"}>
+                                                <IonIcon icon={addCircleOutline}
+                                                         style={{width:"25px", height:"25px"}}
+                                                         onClick={()=>addCart(search)}
+
+                                                /></p>
+                                        </IonCardSubtitle>
                                     </IonCardContent>
                                 </IonCard>
                             </IonCol>
@@ -258,29 +272,33 @@ const ProductClientList = () => {
                     :
 
                     products.filter(i => i.stock  > 0).map((product,i)=>(
-                    <IonCol size="6">
-                    <IonCard key={i} onClick={()=>addCart(product)} >
-                        <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
-                        />
-                        <IonCardHeader>
-                            <IonCardTitle>{product.name}</IonCardTitle>
-                        </IonCardHeader>
-                        <IonCardContent>
-                            <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
-                        </IonCardContent>
-                    </IonCard>
-                    </IonCol>
+                            <IonCol size={"6"}>
+                            <IonCard key={i} >
+                                <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                                />
+                                <IonCardContent>
+                                    <IonCardTitle><p>{product.name}</p></IonCardTitle>
+                                    <IonCardSubtitle><p>{product.price.toFixed(2)}</p>
+                                    <p align={"right"}>
+                                        <IonIcon icon={addCircleOutline}
+                                                 style={{width:"25px", height:"25px"}}
+                                                 onClick={()=>addCart(product)}
+
+                                    /></p>
+                                    </IonCardSubtitle>
+                                </IonCardContent>
+                            </IonCard>
+                            </IonCol>
+
                 ))
             }
                 </IonRow>
-            </IonGrid>
-
             <Modal  title="Carrito de compras"
                     visible={showCart}
                     closable={false}
                     footer={[
-                        <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>,
-                        <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
+                        <IonButton htmlType='submit' onClick={onCreate} size={"small"}>Comprar</IonButton>,
+                        <IonButton onClick={()=>setShowCart(false)} size={"small"}>Cancelar</IonButton>
                     ]}
             >
                     <IonList>
@@ -292,37 +310,40 @@ const ProductClientList = () => {
                                 </IonAvatar>
                                 <IonLabel>
                                     <IonRow>
-                                    <IonCol>{car.cartName}</IonCol>
+                                    {car.cartName}
                                     <IonCol><InputNumber
                                         id={car.cartName.split(" ").join("")}
                                         defaultValue={car.cartQuantity}
                                         min={1}
                                         max={10}
-                                        style={{width:"50px"}}/></IonCol>
+                                        style={{width:"50px"}}/>
+                                    </IonCol>
                                     <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
-                                    </IonRow>
-                                </IonLabel>
-                                <IonIcon
+                                    <IonCol>
+                                    <IonIcon
                                     icon={arrowUpCircleOutline}
                                     style={{width:"25px", height:"25px"}}
-                                    slot={"end"}
                                     onClick={()=>updateCart(car)}
                                 />
-                                <IonIcon
+                                </IonCol>
+                                <IonCol>
+                                    <IonIcon
                                     icon={trashOutline}
                                     style={{width:"25px", height:"25px"}}
-                                    slot={"end"}
                                     onClick={()=>deleteCart(i)}
-                                />
+                                    />
+                                </IonCol>
+                                    </IonRow>
+                                </IonLabel>
                             </IonItem>
                             ))
                         }
                     </IonList>
                     <IonItem>
-                        <IonLabel slot={"end"}> <div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
+                        <IonLabel><div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
                     </IonItem>
                     <IonText>
-                        <h3>Tipo de entrega</h3>
+                        <h3><strong>Tipo de entrega</strong></h3>
                     </IonText>
 
                         <IonRow>
@@ -330,6 +351,9 @@ const ProductClientList = () => {
                         <IonSelect value={type}
                                    placeholder={"Tipo de entrega"}
                                    onIonChange={e => setType(e.detail.value)}
+                                   okText={"Aceptar"}
+                                   cancelText={"Cancelar"}
+
                         >
                             <IonSelectOption value={"deliver"}>A domicilio</IonSelectOption>
                             <IonSelectOption value={"withdraw"}>En la tienda</IonSelectOption>
@@ -346,7 +370,13 @@ const ProductClientList = () => {
                                 </IonItem>
                             </IonCol>
                         </IonRow>
-
+                        <IonLabel>
+                            {
+                                type === "deliver"
+                                    ? <><p>* Se te cobrará un 10% adicional por la entrega</p></>
+                                    : <></>
+                            }
+                        </IonLabel>
                     <IonItem>
                         <IonLabel slot={"end"}><div><p align={"right"}><strong>Total: </strong>{
                                 type === "deliver"
@@ -369,6 +399,22 @@ const ProductClientList = () => {
                 cssClass={'my-custom-class'}
                 header={'Sin stock'}
                 message={'No puede realizar la compra porque no existe suficiente stock'}
+                buttons={['OK']}
+            />
+            <IonAlert
+                isOpen={showAlert3}
+                onDidDismiss={()=>setShowAlert3(false)}
+                cssClass={'my-custom-class'}
+                header={'Compra Exitosa'}
+                message={'¡Su compra se realizo de manera exitosa!'}
+                buttons={['OK']}
+            />
+            <IonAlert
+                isOpen={showAlert4}
+                onDidDismiss={()=>setShowAlert4(false)}
+                cssClass={'my-custom-class'}
+                header={'Tipo de entrega'}
+                message={'No ha seleccionado un tipo de entrega'}
                 buttons={['OK']}
             />
         </>
