@@ -127,7 +127,7 @@ const RegisterUser = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input prefix={<MailOutlined/>} placeholder='Email'/>
+                            <Input prefix={<MailOutlined/>} placeholder='Correo'/>
                         </Form.Item>
 
                         <Form.Item name='password'

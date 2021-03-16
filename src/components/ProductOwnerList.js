@@ -6,9 +6,9 @@ import {
     IonButton,
     IonCard, IonCardContent, IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
-    IonItem, IonModal, IonPage,
-    IonRow, IonThumbnail, IonTitle, IonToolbar,
+    IonCardTitle, IonCol, IonGrid, IonImg,
+    IonItem,
+    IonRow, IonThumbnail, IonToolbar,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
@@ -110,11 +110,12 @@ const ProductOwnerList = () => {
 
     return (
         <>
-            <IonGrid>
-                <IonRow>
+
+
                     <IonToolbar>
-                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
+                        <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
                     </IonToolbar>
+                    <IonRow>
             {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
@@ -122,11 +123,8 @@ const ProductOwnerList = () => {
                             <IonCard key={i} onClick={()=>showDetail(search.id)} >
                                     <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
                                          style={{height: "100px"}}/>
-                                         <IonCardHeader>
-                                             <IonCardTitle>{search.name}</IonCardTitle>
-                                         </IonCardHeader>
-
                                 <IonCardContent>
+                                    <IonCardTitle><p>{search.name}</p></IonCardTitle>
                                     <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Stock: </strong>{search.stock}</IonCardSubtitle>
                                 </IonCardContent>
@@ -140,11 +138,8 @@ const ProductOwnerList = () => {
                     <IonCard key={i} onClick={()=>showDetails(i)} >
                                 <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
                                      />
-                        <IonCardHeader>
-                            <IonCardTitle>{product.name}</IonCardTitle>
-                        </IonCardHeader>
-
                         <IonCardContent>
+                            <IonCardTitle><p>{product.name}</p></IonCardTitle>
                             <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Stock: </strong>{product.stock}</IonCardSubtitle>
                         </IonCardContent>
@@ -154,7 +149,6 @@ const ProductOwnerList = () => {
                 : "Cargando..."
             }
                 </IonRow>
-            </IonGrid>
             {
                 product.isLoading
                     ? <div>Cargando...</div>
@@ -165,10 +159,10 @@ const ProductOwnerList = () => {
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
-                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
+                                    <IonButton onClick={onUpdate} size={"small"}>
                                         Actualizar
                                     </IonButton>,
-                                    <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
+                                    <IonButton onClick={()=>setShowInfo(false)} size={"small"}>Cancelar</IonButton>
                                 ]}
                         >
                                 <IonRow>

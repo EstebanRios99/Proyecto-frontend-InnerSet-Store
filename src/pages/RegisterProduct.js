@@ -3,10 +3,8 @@ import API from '../data/index';
 import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
-import '../styles/register.css';
-import {Link} from 'react-router-dom';
-import {IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar} from "@ionic/react";
-import {arrowBack} from "ionicons/icons";
+import '../theme/register.css';
+import {IonButton, IonHeader, IonPage,  IonImg,IonTitle, IonToolbar} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -142,10 +140,10 @@ const RegisterProduct = () => {
             <IonPage>
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
+                        <div slot={"start"} className="menu">
+                            <Layouts />
+                        </div>
                        <IonTitle id={"letter"}>
-                            <div slot={"start"} className="menu">
-                                <Layouts />
-                            </div>
                             Registro de productos
                        </IonTitle>
                     </IonToolbar>
@@ -218,7 +216,7 @@ const RegisterProduct = () => {
                         </Form.Item>
 
                         <Form.Item name='image'
-                                   label='Upload'
+                                   label='Imagen'
                                    valuePropName='fileList'
                                    getValueFromEvent={ normPhotoFile }
                                    rules={ [
@@ -240,7 +238,7 @@ const RegisterProduct = () => {
                                     ? <img src={ imageUrl } alt='Foto' style={ { width: '80px' } } />
                                     : <div>
                                         <PlusOutlined />
-                                        <div className='ant-upload-text'>Upload</div>
+                                        <div className='ant-upload-text'>Subir imagen</div>
                                     </div> }
                             </Upload>
                         </Form.Item>
