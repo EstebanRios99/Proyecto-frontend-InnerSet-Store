@@ -181,29 +181,29 @@ Por último se presenta cada uno de los *Alerts* que se desplegará de acuerdo a
 
 Dentro de esta página se muestran todos los productos que el usuario registra en el modulo de registro. Para que este modulo funcione necesita de los siguientes elementos.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/40.png)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/40.PNG)
 
 Con todass estas dependencias realizamos las llamadas de los datos desde el api el que traera los productos que han sido registrados por el Propietario. Ademas de otros parametros que forman parte de todo este componete.
 El uso de estados que ayudaran a abrir el el modal para la respectiva actualizacion del producto.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/41.jpg)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/41.PNG)
 
 Para la actualización de un producto se usa el metodo *oUpdate* el cual obtendra los parametros ingresados o que ya constan inicialmente en dicho formulario. Una vez de haber validado estos datos se generar el metodo respectivo que actualiza el registro dentro del la BD. Si todo es correcto se actualizara el contenido y mostrara en la lista de productos. Si existe algun error se informra cual es el error que se ha tenido.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/42.jpg)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/42.PNG)
 
 Para facilidad del usuario se define un metodo de busqueda de productos para su actualización. Para presentar todos los productos que se obtienen desde el API, los que se mapean y se van asignando segun una clave en cada una de las tarjetas. estas tarjetas se seleccionan y abren el modal que muestra el formulario para la actualización.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/46.jpg)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/46.PNG)
 
 ### Página de registro de productos
 
 Para el registro de productos se define un formulario que recolectara los datos para generar un post de datos a la base de datos tambien seran validados para que no se comentan errores al moemento de crear uno nuevo.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/56.jpg)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/56.PNG)
 
 Para enviar los datos desde el formulario se crea un metodo *onCreate*, que permitira validar los datos que se ingresan al formulario y cuando se cumpla se envia la peticion post para que se envien a la BD. cuando se complete le proceso este se podra visualizar en la pantalla del Productos.
 
-![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/45.jpg)
+![Image text](https://raw.githubusercontent.com/EstebanRios99/Proyecto-frontend-InnerSet-Store/dev/Capturas/45.PNG)
 
 
