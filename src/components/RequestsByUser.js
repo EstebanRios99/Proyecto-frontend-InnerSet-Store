@@ -31,27 +31,27 @@ const RequestsByUser = () => {
 
     if( isLoadingRequests ) {
         return <>
-                    <IonList>
-                        <IonItem>
-                            <IonThumbnail slot={"start"}>
-                                <IonSkeletonText />
-                            </IonThumbnail>
-                            <IonLabel>
-                                <IonSkeletonText />
-                            </IonLabel>
-                        </IonItem>
-                    </IonList>
-                    <IonList>
-                        <IonItem>
-                            <IonThumbnail slot={"start"}>
-                                <IonSkeletonText />
-                            </IonThumbnail>
-                            <IonLabel>
-                                <IonSkeletonText />
-                            </IonLabel>
-                        </IonItem>
-                    </IonList>
-                </>
+                <IonList>
+                    <IonItem>
+                        <IonThumbnail slot={"start"}>
+                            <IonSkeletonText />
+                        </IonThumbnail>
+                        <IonLabel>
+                            <IonSkeletonText />
+                        </IonLabel>
+                    </IonItem>
+                </IonList>
+                <IonList>
+                    <IonItem>
+                        <IonThumbnail slot={"start"}>
+                            <IonSkeletonText />
+                        </IonThumbnail>
+                        <IonLabel>
+                            <IonSkeletonText />
+                        </IonLabel>
+                    </IonItem>
+                </IonList>
+            </>
     }
 
     if( isErrorRequests ) {
@@ -94,13 +94,11 @@ const RequestsByUser = () => {
                                       : requests.status === "delivered"
                                           ? 1
                                           : 0
-                          }
-                          />
-                      </IonLabel>
+                          }/>
+                        </IonLabel>
                   </IonItem>
-              ))
-                  : ""
-          }
+              )) : ""
+            }
           </IonList>
 
           {
@@ -137,12 +135,12 @@ const RequestsByUser = () => {
                                   <IonButton onClick={()=>setShowDetail(false)} size={"small"}>Cerrar</IonButton>
                               ]}
                       >
-                              <IonGrid>
-                                  <IonRow>
-                                      <IonCol><strong>N° de Pedido: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
-                                      <IonCol><strong>Fecha: </strong> {request.request.date}</IonCol>
-                                  </IonRow>
-                              </IonGrid>
+                          <IonGrid>
+                              <IonRow>
+                                  <IonCol><strong>N° de Pedido: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
+                                  <IonCol><strong>Fecha: </strong> {request.request.date}</IonCol>
+                              </IonRow>
+                          </IonGrid>
                               {
                                   detailRequest.isLoading
                                       ? <>
@@ -191,15 +189,15 @@ const RequestsByUser = () => {
                                                   <IonItem key={i}>
                                                       <IonLabel >
                                                           <IonRow>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.product.name}</p>
-                                                          </IonCol>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.quantity}</p>
-                                                          </IonCol>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
-                                                          </IonCol>
+                                                              <IonCol>
+                                                                <p align={"center"}>{detail.product.name}</p>
+                                                              </IonCol>
+                                                              <IonCol>
+                                                                <p align={"center"}>{detail.quantity}</p>
+                                                              </IonCol>
+                                                              <IonCol>
+                                                                <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
+                                                              </IonCol>
                                                           </IonRow>
                                                       </IonLabel>
                                                   </IonItem>

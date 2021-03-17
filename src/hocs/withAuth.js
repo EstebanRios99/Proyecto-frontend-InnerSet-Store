@@ -1,6 +1,3 @@
-/**
- * Created by chalosalvador on 8/16/20
- */
 import withAuthRedirect from './withAuthRedirect';
 import Routes from '../constants/routes';
 /**

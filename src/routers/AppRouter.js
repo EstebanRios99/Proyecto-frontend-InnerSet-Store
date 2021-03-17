@@ -21,7 +21,6 @@ import {Redirect} from "react-router";
  */
 const loadableOptions = {fallback: <Loading/>};
 
-//const AsyncHome = loadable(() => import( '../pages/Index' ), loadableOptions);
 const AsyncLogin = loadable(() => import( '../pages/Login' ), loadableOptions);
 const AsyncClientProducts = loadable(() => import( '../pages/ClientProducts' ), loadableOptions);
 const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);

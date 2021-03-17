@@ -6,9 +6,9 @@ import ShowError from "./ShowError";
 import {
     IonCard, IonCardContent,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonText, IonItem,
+    IonCardTitle, IonCol, IonText, IonItem,
     IonRow, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -23,13 +23,9 @@ import "../theme/toolbar.css";
 const ProductClientList = () => {
 
     const { products, isLoading, isError} = useProducts();
-
     const { requests,isLoadingRequest,isErrorRequest, mutate} = useRequests();
-
     const {mutateByUser} =useRequestsByUser();
-
     const [search, setSearch]=useState('');
-
     const {searchProduct}=useSearchProduct(search);
 
     const [cart, setCart]=useState([]);
@@ -148,7 +144,7 @@ const ProductClientList = () => {
                                     surcharge: surcharge,
                                     total: total,
                                     status: "pending",
-                                }); // post data to server
+                                });
                                 await afterCreate();
                             } catch( error ) {
                                 console.error(
@@ -240,38 +236,35 @@ const ProductClientList = () => {
 
     return (
         <>
-
-                    <IonToolbar>
-                        <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
-                        <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
-                    </IonToolbar>
-                <IonRow>
-
+        <IonToolbar>
+            <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
+            <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
+        </IonToolbar>
+        <IonRow>
             {
                 searchProduct ?
-                        searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
-                            <IonCol  size={"6"}>
-                                <IonCard key={i}>
-                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
-                                            style={{height: "100px"}}/>
-                                    <IonCardContent>
-                                        <IonCardTitle><p>{search.name}</p></IonCardTitle>
-                                        <IonCardSubtitle><p>{search.price.toFixed(2)}</p>
-                                            <p align={"right"}>
-                                                <IonIcon icon={addCircleOutline}
-                                                         style={{width:"25px", height:"25px"}}
-                                                         onClick={()=>addCart(search)}
+                    searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
+                        <IonCol  size={"6"}>
+                            <IonCard key={i}>
+                                <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                        style={{height: "100px"}}/>
+                                <IonCardContent>
+                                    <IonCardTitle><p>{search.name}</p></IonCardTitle>
+                                    <IonCardSubtitle><p>{search.price.toFixed(2)}</p>
+                                        <p align={"right"}>
+                                            <IonIcon icon={addCircleOutline}
+                                                     style={{width:"25px", height:"25px"}}
+                                                     onClick={()=>addCart(search)}
 
-                                                /></p>
-                                        </IonCardSubtitle>
-                                    </IonCardContent>
-                                </IonCard>
-                            </IonCol>
-                        ))
+                                            /></p>
+                                    </IonCardSubtitle>
+                                </IonCardContent>
+                            </IonCard>
+                        </IonCol>
+                    ))
                     :
-
                     products.filter(i => i.stock  > 0).map((product,i)=>(
-                            <IonCol size={"6"}>
+                        <IonCol size={"6"}>
                             <IonCard key={i} >
                                 <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
                                 />
@@ -287,43 +280,42 @@ const ProductClientList = () => {
                                     </IonCardSubtitle>
                                 </IonCardContent>
                             </IonCard>
-                            </IonCol>
-
-                ))
+                        </IonCol>
+                    ))
             }
-                </IonRow>
-            <Modal  title="Carrito de compras"
-                    visible={showCart}
-                    closable={false}
-                    footer={[
-                        <IonButton htmlType='submit' onClick={onCreate} size={"small"}>Comprar</IonButton>,
-                        <IonButton onClick={()=>setShowCart(false)} size={"small"}>Cancelar</IonButton>
-                    ]}
-            >
-                    <IonList>
-                        {
-                         cart.map((car,i)=>(
-                            <IonItem key={i}>
-                                <IonAvatar slot={"start"}>
-                                    <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
-                                </IonAvatar>
-                                <IonLabel>
-                                    <IonRow>
-                                    {car.cartName}
-                                    <IonCol><InputNumber
-                                        id={car.cartName.split(" ").join("")}
-                                        defaultValue={car.cartQuantity}
-                                        min={1}
-                                        max={10}
-                                        style={{width:"50px"}}/>
-                                    </IonCol>
-                                    <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
-                                    <IonCol>
+        </IonRow>
+        <Modal  title="Carrito de compras"
+                visible={showCart}
+                closable={false}
+                footer={[
+                    <IonButton htmlType='submit' onClick={onCreate} size={"small"}>Comprar</IonButton>,
+                    <IonButton onClick={()=>setShowCart(false)} size={"small"}>Cancelar</IonButton>
+                ]}
+        >
+            <IonList>
+                {
+                 cart.map((car,i)=>(
+                    <IonItem key={i}>
+                        <IonAvatar slot={"start"}>
+                            <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
+                        </IonAvatar>
+                        <IonLabel>
+                            <IonRow>
+                                {car.cartName}
+                                <IonCol><InputNumber
+                                    id={car.cartName.split(" ").join("")}
+                                    defaultValue={car.cartQuantity}
+                                    min={1}
+                                    max={10}
+                                    style={{width:"50px"}}/>
+                                </IonCol>
+                                <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
+                                <IonCol>
                                     <IonIcon
                                     icon={arrowUpCircleOutline}
                                     style={{width:"25px", height:"25px"}}
                                     onClick={()=>updateCart(car)}
-                                />
+                                    />
                                 </IonCol>
                                 <IonCol>
                                     <IonIcon
@@ -332,57 +324,59 @@ const ProductClientList = () => {
                                     onClick={()=>deleteCart(i)}
                                     />
                                 </IonCol>
-                                    </IonRow>
-                                </IonLabel>
-                            </IonItem>
-                            ))
-                        }
-                    </IonList>
-                    <IonItem>
-                        <IonLabel><div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
+                            </IonRow>
+                        </IonLabel>
                     </IonItem>
-                    <IonText>
-                        <h3><strong>Tipo de entrega</strong></h3>
-                    </IonText>
+                    ))
+                }
+            </IonList>
+            <IonItem>
+                <IonLabel><div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
+            </IonItem>
+            <IonText>
+                <h3><strong>Tipo de entrega</strong></h3>
+            </IonText>
 
-                        <IonRow>
-                            <IonCol>
-                        <IonSelect value={type}
-                                   placeholder={"Tipo de entrega"}
-                                   onIonChange={e => setType(e.detail.value)}
-                                   okText={"Aceptar"}
-                                   cancelText={"Cancelar"}
-
-                        >
-                            <IonSelectOption value={"deliver"}>A domicilio</IonSelectOption>
-                            <IonSelectOption value={"withdraw"}>En la tienda</IonSelectOption>
-                        </IonSelect>
-                            </IonCol>
-                            <IonCol>
-                                <IonItem>
-                                <IonLabel>
-                                    {
-                                        type === "deliver"
-                                            ? <><p align={"right"}>{(total * .1).toFixed(2)}</p></>
-                                            : <><p align={"right"}>0.00</p></>
-                                    }</IonLabel>
-                                </IonItem>
-                            </IonCol>
-                        </IonRow>
+            <IonRow>
+                <IonCol>
+                    <IonSelect value={type}
+                       placeholder={"Tipo de entrega"}
+                       onIonChange={e => setType(e.detail.value)}
+                       okText={"Aceptar"}
+                       cancelText={"Cancelar"}
+                    >
+                        <IonSelectOption value={"deliver"}>A domicilio</IonSelectOption>
+                        <IonSelectOption value={"withdraw"}>En la tienda</IonSelectOption>
+                    </IonSelect>
+                </IonCol>
+                <IonCol>
+                    <IonItem>
                         <IonLabel>
                             {
                                 type === "deliver"
-                                    ? <><p>* Se te cobrará un 10% adicional por la entrega</p></>
-                                    : <></>
+                                    ? <><p align={"right"}>{(total * .1).toFixed(2)}</p></>
+                                    : <><p align={"right"}>0.00</p></>
                             }
                         </IonLabel>
-                    <IonItem>
-                        <IonLabel slot={"end"}><div><p align={"right"}><strong>Total: </strong>{
-                                type === "deliver"
-                                    ? (total * 1.1).toFixed(2)
-                                    : total.toFixed(2)
-                        }</p></div></IonLabel>
                     </IonItem>
+                </IonCol>
+            </IonRow>
+            <IonLabel>
+                {
+                    type === "deliver"
+                        ? <><p>* Se te cobrará un 10% adicional por la entrega</p></>
+                        : <></>
+                }
+            </IonLabel>
+            <IonItem>
+                <IonLabel slot={"end"}>
+                    <div><p align={"right"}><strong>Total: </strong>{
+                        type === "deliver"
+                            ? (total * 1.1).toFixed(2)
+                            : total.toFixed(2)
+                    }</p></div>
+                </IonLabel>
+            </IonItem>
             </Modal>
             <IonAlert
                 isOpen={showAlert1}

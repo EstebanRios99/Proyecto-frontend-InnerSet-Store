@@ -16,9 +16,10 @@ import {bagCheck, bagHandle, checkmarkCircle, alertCircle, cart} from "ionicons/
 import {CloseOutlined} from '@ant-design/icons';
 import Skeleton from './Skeleton';
 import {Modal, message} from 'antd';
+import moment from "moment";
 
 const NewRequest = () =>{
-    const {requests, isLoadingRequest, isErrorRequest,mutate} = useRequests();
+    const {requests, isLoadingRequest, isErrorRequest, mutate} = useRequests();
 
     const [idRequest, setIdRequest] = useState('');
     const [showDetail, setShowDetail] = useState(false);
@@ -39,7 +40,7 @@ const NewRequest = () =>{
     }
 
     const handleShowDetail=(index)=>{
-        const id=requests[index].id;
+        const id=index.id;
         setIdRequest(id);
         setShowDetail(true);
     }
@@ -71,12 +72,20 @@ const NewRequest = () =>{
             await API.put( `/requests/status/${idRequest}`, {
                 status: status,
             } );
-            
+            await afterCreate();
+            setShowDetail(false);
 
         } catch( error ) {
             console.error('You have an error in your code or there are Network issues.',error);
             message.error( translateMessage( error.message ) );
         }
+
+    };
+
+    const afterCreate = async () => {
+        await mutate('/requests', async requests => {
+            return {data: [{}, ...requests.data]};
+        },false);
 
     };
 
@@ -86,8 +95,9 @@ const NewRequest = () =>{
         <>
         <IonList>
             {
-                requests.map( ( orders, i ) => (
-                    <IonItem key={i} onClick={()=>handleShowDetail(i)}>
+                requests ?
+                requests.filter(i => i.date  === moment().format('YYYY-MM-D')).map( ( orders, i ) => (
+                    <IonItem key={i} onClick={()=>handleShowDetail(orders)}>
                         {orders.status==='pending'
                         ?<IonIcon slot="end" icon={alertCircle} style={{width:"40px", height:"40px", color:"red"}}/>
                             :orders.status=== 'accomplished'
@@ -110,6 +120,7 @@ const NewRequest = () =>{
                         </IonLabel>
                     </IonItem>
                 ))
+                    : ""
             }
         </IonList>
 

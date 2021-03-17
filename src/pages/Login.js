@@ -22,7 +22,6 @@ const Login = () => {
   const { setAuthenticated, setCurrentUser } = useAuth();
 
   const onFinish = async( userData ) => {
-
     try {
       const response = await API.post( '/login', {
         email: userData.username,

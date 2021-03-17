@@ -1,7 +1,3 @@
-
-/**
- * Created by chalosalvador on 3/1/20
- */
 import Cookies from 'js-cookie';
 import Routes from '../constants/routes';
 import history from '../utils/history';
