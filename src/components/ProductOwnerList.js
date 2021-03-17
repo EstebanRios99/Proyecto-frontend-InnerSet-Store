@@ -4,9 +4,9 @@ import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {
     IonButton,
-    IonCard, IonCardContent, IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonImg,
+    IonCard, IonCardContent,
+    IonCardSubtitle, IonImg,
+    IonCardTitle, IonCol,
     IonItem,
     IonRow, IonThumbnail, IonToolbar,
 } from "@ionic/react";
@@ -63,7 +63,7 @@ const ProductOwnerList = () => {
             } )
             .catch( info => {
                 console.log( 'Validate Failed:', info );
-            } );
+        } );
 
     };
 
@@ -112,8 +112,6 @@ const ProductOwnerList = () => {
 
     return (
         <>
-
-
                     <IonToolbar>
                         <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
                     </IonToolbar>

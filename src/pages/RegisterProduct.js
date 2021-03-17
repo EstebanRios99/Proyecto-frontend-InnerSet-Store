@@ -41,8 +41,6 @@ const RegisterProduct = () => {
         form.validateFields()
             .then( async( values ) => {
                 console.log( 'values', values );
-
-
                 // use form data to be able to send a file to the server
                 const data = new FormData();
                 data.append( 'image', values.image[ 0 ] );
