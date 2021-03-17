@@ -3,6 +3,7 @@
 ***
 * Clonar el repositorio
 * Ejecutar **npm install** para instalar las dependencias
+* Repositorio de la API: https://github.com/EstebanRios99/Proyecto-InnerSet-Store
 ### Configuración de las rutas
 ***
 Dentro de la carpeta *src/constants* se encuentra el archivo *routes.js* donde se establecen todas las rutas que se van a usar para el proyecto.  
