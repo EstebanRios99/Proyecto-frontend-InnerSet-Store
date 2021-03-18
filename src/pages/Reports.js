@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {
-    IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonDatetime,
-    IonGrid,
+    IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonDatetime,
     IonHeader, IonImg, IonItem, IonLabel,
-    IonPage, IonRow,
+    IonPage,
     IonTitle,
     IonToolbar,
 } from "@ionic/react";

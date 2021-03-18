@@ -31,6 +31,7 @@ const ProductClientList = () => {
     const [cart, setCart]=useState([]);
     const [showCart, setShowCart]=useState(false);
     const [type, setType]=useState('');
+    const [noStock, setNoStock]=useState('');
     const [total, setTotal] = useState(0);
     const [showAlert1, setShowAlert1] = useState(false);
     const [showAlert2, setShowAlert2] = useState(false);
@@ -124,9 +125,13 @@ const ProductClientList = () => {
         if (cart.length > 0){
             for (let i=0; i<cart.length; i++) {
                 for (let j = 0; j < products.length; j++) {
-                    if (products[j].id === cart[i].cartId && products[j].stock > cart[i].cartQuantity) {
-                        cart2.push(cart[i]);
-                    }}}
+                    if (products[j].id === cart[i].cartId){
+                        if(products[j].stock > cart[i].cartQuantity) {
+                            cart2.push(cart[i]);
+                        }else{
+                            setNoStock(cart[i].cartName + ', solo se dispone de '+ products[j].stock);
+                        }}}}
+                    console.log("no stock", noStock);
                     if (cart2.length === cart.length){
                         let subtotal=0;
                         console.log("tipo entrega", type);
@@ -143,7 +148,7 @@ const ProductClientList = () => {
                                     type: type,
                                     surcharge: surcharge,
                                     total: total,
-                                    status: "pending",
+                                    status: "new",
                                 });
                                 await afterCreate();
                             } catch( error ) {
@@ -297,7 +302,7 @@ const ProductClientList = () => {
                  cart.map((car,i)=>(
                     <IonItem key={i}>
                         <IonAvatar slot={"start"}>
-                            <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
+                            <IonImg src={`http://localhost:8000/storage/${ car.cartImage }`} />
                         </IonAvatar>
                         <IonLabel>
                             <IonRow>
@@ -391,7 +396,7 @@ const ProductClientList = () => {
                 onDidDismiss={()=>setShowAlert2(false)}
                 cssClass={'my-custom-class'}
                 header={'Sin stock'}
-                message={'No puede realizar la compra porque no existe suficiente stock'}
+                message={'No se puede realizar la compra porque no hay stock suficiente del producto ' + noStock + ' en stock'}
                 buttons={['OK']}
             />
             <IonAlert
