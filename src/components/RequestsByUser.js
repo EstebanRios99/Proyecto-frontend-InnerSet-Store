@@ -75,25 +75,33 @@ const RequestsByUser = () => {
                        <IonLabel>
                           <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
                           <div><p><strong>Total: </strong>{requests.total.toFixed(2)}</p></div>
-                          <div><p><strong>Estado: </strong>{requests.status === "pending"
-                              ? "Pendiente"
-                              : requests.status=== "accomplished"
-                                  ? "Realizado"
-                                  : requests.status === "retired"
-                                      ? "En camino"
-                                      : requests.status === "delivered"
-                                          ? "Entregado"
+                          <div><p><strong>Estado: </strong>{requests.status === "new"
+                              ? "Nuevo"
+                              : requests.status=== "pending"
+                                  ? "Pendiente"
+                                  : requests.status === "accomplished"
+                                      ? "Realizado"
+                                      :requests.status === "retired"
+                                        ? "Por retirar"
+                                        : requests.status === "sent"
+                                            ? "Enviado"
+                                            : requests.status === "delivered"
+                                          ? "Finalizado"
                                           : ""}</p></div>
                           <IonProgressBar style={{height: "15px"}} value={
-                              requests.status === "pending"
+                              requests.status === "new"
+                                  ? 0
+                                  : requests.status=== "pending"
                                   ? 0.25
-                                  : requests.status=== "accomplished"
-                                  ? 0.5
-                                  : requests.status === "retired"
-                                      ? 0.75
-                                      : requests.status === "delivered"
-                                          ? 1
-                                          : 0
+                                  : requests.status === "accomplished"
+                                      ? 0.5
+                                      : requests.status === "retired"
+                                          ? 0.75
+                                          : requests.status === "sent"
+                                              ? 0.75
+                                              :requests.status === "delivered"
+                                                ? 1
+                                                : 0
                           }/>
                         </IonLabel>
                   </IonItem>

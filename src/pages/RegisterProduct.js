@@ -242,7 +242,7 @@ const RegisterProduct = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <IonButton type='primary' htmlType='submit' className='login-form-button'>
+                            <IonButton htmlType='submit' >
                                 Registrar Producto
                             </IonButton>
                         </Form.Item>

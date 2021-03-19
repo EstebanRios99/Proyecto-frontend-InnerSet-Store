@@ -126,7 +126,12 @@ const ProductOwnerList = () => {
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
                                     <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Stock: </strong>{search.stock}</IonCardSubtitle>
+                                    <IonCardSubtitle>{
+                                        search.stock > 5
+                                        ? <strong>Stock: {search.stock}</strong>
+                                            : <p style={{color: "#ff4961"}}><strong>Stock: {search.stock}</strong></p>
+                                    }</IonCardSubtitle>
+
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -141,7 +146,11 @@ const ProductOwnerList = () => {
                         <IonCardContent>
                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
                             <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Stock: </strong>{product.stock}</IonCardSubtitle>
+                            <IonCardSubtitle>{
+                                product.stock > 5
+                                    ? <strong>Stock: {product.stock}</strong>
+                                    : <p style={{color: "#ff4961"}}><strong>Stock: {product.stock}</strong></p>
+                            }</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
