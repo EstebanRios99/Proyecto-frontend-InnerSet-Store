@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, InputNumber, Modal} from "antd";
+import {message,Row,Col, Skeleton, InputNumber, Modal} from "antd";
 import Card from "antd-mobile/es/card";
 import React, {useEffect, useState} from "react";
 import ShowError from "./ShowError";
@@ -8,7 +8,7 @@ import {
     IonCardSubtitle,
     IonCardTitle, IonCol, IonText, IonItem,
     IonRow, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonToast, IonBadge
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -18,6 +18,7 @@ import API from "../data";
 import {useRequests} from "../data/useRequests";
 import {useRequestsByUser} from "../data/useRequestsByUser";
 import "../theme/toolbar.css";
+
 
 
 const ProductClientList = () => {
@@ -37,6 +38,8 @@ const ProductClientList = () => {
     const [showAlert2, setShowAlert2] = useState(false);
     const [showAlert3, setShowAlert3] = useState(false);
     const [showAlert4, setShowAlert4] = useState(false);
+
+
 
     console.log('search', searchProduct);
 
@@ -95,6 +98,8 @@ const ProductClientList = () => {
         ]);
         console.log("total", total1);
         console.log("carrito",cart);
+
+        message.success('Producto agregado al carrito', 1)
     }
 
     const updateCart =(index)=>{
@@ -243,8 +248,9 @@ const ProductClientList = () => {
         <>
         <IonToolbar>
             <Search placeholder="Ingrese nombre del producto" onSearch={onSearch} enterButton />
-            <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
         </IonToolbar>
+            <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
+            <IonBadge >{cart.length}</IonBadge>
         <IonRow>
             {
                 searchProduct ?
