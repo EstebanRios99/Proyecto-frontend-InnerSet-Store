@@ -15,22 +15,24 @@ import {notifications} from "ionicons/icons";
 
 const ClientProductsPage = () => {
 
-    const {requests}=useRequestsByUser();
+    const {requestsByUser}=useRequestsByUser();
     const [data, setData]= useState([]);
-    const [popoverState, setpopoverState] = useState(false);
-    const [newState, setnewState] = useState(true);
+    const [popoverState, setPopoverState] = useState(false);
+    const [newState, setNewState] = useState(true);
 
     useEffect ( () => {
-        if (requests && newState){
-            const newData= requests.filter(i => i.status  === 'pending' );
+        if (requestsByUser && newState){
+            const newData= requestsByUser.filter(i => i.status  === 'pending' );
             console.log('nueva lon ', newData.length);
             setData(newData);
-            setnewState(false);
+            setNewState(false);
         }
     });
 
+    console.log("pedidos", requestsByUser);
+
     const handleStatus = () =>{
-        setpopoverState(true);
+        setPopoverState(true);
     }
 
     return    (
@@ -51,7 +53,7 @@ const ClientProductsPage = () => {
             <ProductClientList/>
         </IonPage>
         <IonPopover isOpen={popoverState} cssClass='my-custom-class'
-            onDidDismiss={() => setpopoverState(false)}>
+            onDidDismiss={() => setPopoverState(false)}>
                 <div style={{background:'#3880ff'}}><h3 style={{'text-align':'center'}}>Su Orden ha sido Recibida</h3></div>
                 {
                     data.map((orders, i)=>(

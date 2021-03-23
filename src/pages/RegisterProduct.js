@@ -4,7 +4,7 @@ import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../theme/register.css';
-import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg} from "@ionic/react";
+import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonLoading} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -32,15 +32,16 @@ const RegisterProduct = () => {
     const {isLoading, isError, mutate} = useProducts();
     const [ imageUrl, setImageUrl ] = useState( null );
     const [ fileList, setFileList ] = useState( [] );
+    const [showLoading, setShowLoading] = useState(false);
     const categories = useCategories();
 
     const onCreate = async values => {
+
         console.log( 'Received values of form: ', values );
-
-
         form.validateFields()
             .then( async( values ) => {
                 console.log( 'values', values );
+                setShowLoading(true);
                 // use form data to be able to send a file to the server
                 const data = new FormData();
                 data.append( 'image', values.image[ 0 ] );
@@ -57,6 +58,7 @@ const RegisterProduct = () => {
                     await afterCreate();
                     setFileList( [] );
                     setImageUrl( null );
+                    setShowLoading(false);
                 } catch( e ) {
                     const errorList = e.error && <ErrorList errors={ e.error } />;
                     message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
@@ -65,6 +67,7 @@ const RegisterProduct = () => {
             .catch( info => {
                 console.log( 'Validate Failed:', info );
             } );
+
 
     };
 
@@ -150,12 +153,11 @@ const RegisterProduct = () => {
                     <IonImg src={viveres} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
                 <br/>
                     <Form
-                        className='login-form'
                         form={form}
                           initialValues={{
                               remember: true,
                           }}
-                          onFinish={onCreate}
+                          //onFinish={onCreate}
                     >
                         <Form.Item name='name'
                                    rules={[
@@ -242,12 +244,17 @@ const RegisterProduct = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <IonButton htmlType='submit' >
+                            <IonButton htmlType='submit' onClick={onCreate}>
                                 Registrar Producto
                             </IonButton>
                         </Form.Item>
                     </Form>
            </IonPage>
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
+            />
         </>
     );
 };
