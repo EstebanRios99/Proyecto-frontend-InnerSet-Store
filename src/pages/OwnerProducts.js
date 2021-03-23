@@ -16,8 +16,8 @@ const OwnerProductsPage = () => {
 
     const {requests}=useRequests();
     const [data, setData]= useState([]);
-    const [popoverState, setpopoverState] = useState(false);
-    const [newState, setnewState] = useState(true);
+    const [popoverState, setPopoverState] = useState(false);
+    const [newState, setNewState] = useState(true);
     //console.log( 'longitud', requests.lenght); 
     
     useEffect ( () => {
@@ -25,12 +25,12 @@ const OwnerProductsPage = () => {
             const newData= requests.filter(i => i.status  === 'new' );
             console.log('nueva lon ', newData.length);
             setData(newData);
-            setnewState(false);
+            setNewState(false);
         }
     });
 
     const handleStatus = () =>{
-        setpopoverState(true);
+        setPopoverState(true);
     }
 
     return    (
@@ -51,7 +51,7 @@ const OwnerProductsPage = () => {
                 <ProductOwnerList/>
             </IonPage>
             <IonPopover isOpen={popoverState} cssClass='my-custom-class'
-            onDidDismiss={() => setpopoverState(false)}>
+            onDidDismiss={() => setPopoverState(false)}>
                 <div style={{background:'#3880ff'}}><h3 style={{'text-align':'center'}}>Usted tiene {data.length} ordenes nuevas</h3></div>
                 {
                     data.map((orders, i)=>(

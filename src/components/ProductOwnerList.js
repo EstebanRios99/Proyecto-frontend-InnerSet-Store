@@ -8,7 +8,7 @@ import {
     IonCardSubtitle, IonImg,
     IonCardTitle, IonCol,
     IonItem,
-    IonRow, IonThumbnail, IonToolbar,
+    IonRow, IonThumbnail, IonToolbar, IonLoading,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
@@ -25,6 +25,7 @@ const ProductOwnerList = () => {
     const { products, isLoading, isError, mutate } = useProducts();
     const [idProduct, setIdProduct]=useState('')
     const [showInfo, setShowInfo] = useState(false);
+    const [showLoading, setShowLoading] = useState(false)
     const [ form ] = Form.useForm();
 
     const [search, setSearch]=useState('');
@@ -43,6 +44,7 @@ const ProductOwnerList = () => {
 
         form.validateFields()
             .then( async( values ) => {
+                setShowLoading(true);
                 try {
                     await API.put( `/products/${idProduct}`, {
                         name: values.name,
@@ -51,6 +53,7 @@ const ProductOwnerList = () => {
                     } ); // post data to server
                     form.resetFields();
                     await afterCreate();
+                    setShowLoading(false);
                     setShowInfo(false);
 
                 } catch( error ) {
@@ -58,6 +61,7 @@ const ProductOwnerList = () => {
                         'You have an error in your code or there are Network issues.',
                         error
                     );
+                    setShowLoading(false);
                     message.error( translateMessage( error.message ) );
                 }
             } )
@@ -121,7 +125,7 @@ const ProductOwnerList = () => {
                     searchProduct.map((search, i)=>(
                         <IonCol  size="6">
                             <IonCard key={i} onClick={()=>showDetail(search.id)} >
-                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                    <IonImg src={ `http://192.168.100.20:8000/storage/${ search.image }` }
                                          style={{height: "100px"}}/>
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
@@ -141,7 +145,7 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
-                                <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                                <IonImg style={{ height: "100px"}} src={ `http://192.168.100.20:8000/storage/${ product.image }` }
                                      />
                         <IonCardContent>
                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
@@ -207,6 +211,11 @@ const ProductOwnerList = () => {
                         </Modal>
                     </>
             }
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
+            />
         </>
     );
 };

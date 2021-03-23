@@ -8,7 +8,7 @@ import {
     IonCardSubtitle,
     IonCardTitle, IonCol, IonText, IonItem,
     IonRow, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonToast, IonBadge
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonToast, IonBadge, IonLoading
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -38,6 +38,7 @@ const ProductClientList = () => {
     const [showAlert2, setShowAlert2] = useState(false);
     const [showAlert3, setShowAlert3] = useState(false);
     const [showAlert4, setShowAlert4] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
 
 
@@ -143,6 +144,7 @@ const ProductClientList = () => {
                         for (let i=0; i < cart.length; i++){
                             subtotal=subtotal + parseFloat(cart[i].cartPrice);
                         }
+                        setShowLoading(true);
                         if (type==="deliver"){
                             try {
                                 const surcharge=subtotal*0.1;
@@ -213,6 +215,7 @@ const ProductClientList = () => {
                             }
                         }
                         setShowCart(false);
+                        setShowLoading(false);
                         setCart([]);
                         setType();
                         setShowAlert3(true);
@@ -257,7 +260,7 @@ const ProductClientList = () => {
                     searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
                         <IonCol  size={"6"}>
                             <IonCard key={i}>
-                                <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                <IonImg src={ `http://192.168.100.20:8000/storage/${ search.image }` }
                                         style={{height: "100px"}}/>
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
@@ -277,7 +280,7 @@ const ProductClientList = () => {
                     products.filter(i => i.stock  > 0).map((product,i)=>(
                         <IonCol size={"6"}>
                             <IonCard key={i} >
-                                <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                                <IonImg style={{ height: "100px"}} src={ `http://192.168.100.20:8000/storage/${ product.image }` }
                                 />
                                 <IonCardContent>
                                     <IonCardTitle><p>{product.name}</p></IonCardTitle>
@@ -420,6 +423,11 @@ const ProductClientList = () => {
                 header={'Tipo de entrega'}
                 message={'No ha seleccionado un tipo de entrega'}
                 buttons={['OK']}
+            />
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
             />
         </>
     );

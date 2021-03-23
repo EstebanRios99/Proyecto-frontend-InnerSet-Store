@@ -7,7 +7,7 @@ import {
     IonList,
     IonItem,
     IonLabel, IonButton,
-    IonGrid, IonRow, IonCol, IonIcon, IonText
+    IonGrid, IonRow, IonCol, IonIcon, IonText, IonLoading
 } from "@ionic/react";
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
@@ -24,6 +24,7 @@ const NewRequest = () =>{
 
     const [idRequest, setIdRequest] = useState('');
     const [showDetail, setShowDetail] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     const request = useRequest(idRequest);
     const detailRequest = useDetailRequest(idRequest);
@@ -48,6 +49,7 @@ const NewRequest = () =>{
 
     const onUpdate = async() => {
         let status='';
+        setShowLoading(true);
         if(request.request.status==='new'){
             status='pending'
         }
@@ -81,7 +83,7 @@ const NewRequest = () =>{
             console.error('You have an error in your code or there are Network issues.',error);
             message.error( translateMessage( error.message ) );
         }
-
+        setShowLoading(false);
     };
 
     const afterCreate = async () => {
@@ -283,6 +285,11 @@ const NewRequest = () =>{
             </Modal>
             </>
         }
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
+            />
         </>
     );
 }
