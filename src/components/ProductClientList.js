@@ -24,8 +24,8 @@ import "../theme/toolbar.css";
 const ProductClientList = () => {
 
     const { products, isLoading, isError} = useProducts();
-    const { requests,isLoadingRequest,isErrorRequest, mutate} = useRequests();
-    const {mutateByUser} =useRequestsByUser();
+    const {mutate} = useRequests();
+    const {requestsByUser, mutateByUser}=useRequestsByUser();
     const [search, setSearch]=useState('');
     const {searchProduct}=useSearchProduct(search);
 
@@ -38,6 +38,7 @@ const ProductClientList = () => {
     const [showAlert2, setShowAlert2] = useState(false);
     const [showAlert3, setShowAlert3] = useState(false);
     const [showAlert4, setShowAlert4] = useState(false);
+    const [showAlert5, setShowAlert5] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
 
 
@@ -158,6 +159,8 @@ const ProductClientList = () => {
                                     status: "new",
                                 });
                                 await afterCreate();
+                                setShowLoading(false);
+                                setShowAlert5(true);
                             } catch( error ) {
                                 console.error(
                                     'You have an error in your code or there are Network issues.',
@@ -176,8 +179,11 @@ const ProductClientList = () => {
                                         type: type,
                                         surcharge: surcharge,
                                         total: total,
+                                        status: "new",
                                     }); // post data to server
                                     await afterCreate();
+                                    setShowLoading(false);
+                                    setShowAlert5(true);
                                 } catch( error ) {
                                     console.error(
                                         'You have an error in your code or there are Network issues.',
@@ -186,49 +192,48 @@ const ProductClientList = () => {
                                 }
                             }else{
                                 setShowAlert4(true);
+                                setShowLoading(false);
                             }
                         }
-                        if (isLoadingRequest){
-                            return <div>Cargando...</div>
-                        }else{
-                            if(isErrorRequest){
-                                return <ShowError error={ isErrorRequest } />;
-                            }else{
-                                console.log("pedidos", requests)
-                                const idR = requests[requests.length-1].id;
-                                console.log("ultimo", idR);
-                                for (let i=0; i < cart.length; i++){
-                                    await API.post(`/requests/${idR+1}/details`,{
-                                        product_id: cart[i].cartId,
-                                        quantity: cart[i].cartQuantity,
-                                        final_price: parseFloat(cart[i].cartPrice),
-                                    })
-                                    for (let j=0; j < products.length; j++){
-                                        if (products[j].id === cart[i].cartId){
-                                            let stock = products[j].stock - cart[i].cartQuantity;
-                                            await API.put(`/products/${cart[i].cartId}` ,{
-                                                stock: stock,
-                                            })
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        setShowCart(false);
-                        setShowLoading(false);
-                        setCart([]);
-                        setType();
-                        setShowAlert3(true);
-                    }
-                    else{
+                            } else{
                         setShowAlert2(true);
+                        setShowLoading(false);
                         setType();
                     }
-        }else{
+                        }else{
             setShowAlert1(true);
             setType();
         }
     }
+
+    const onConfirm =async ()=>{
+      console.log("Prueba de función");
+      console.log("pedidos", requestsByUser);
+        setShowLoading(true);
+        const idR = requestsByUser[requestsByUser.length - 1].id;
+        console.log("ultimo", idR);
+        for (let i = 0; i < cart.length; i++) {
+            await API.post(`/requests/${idR}/details`, {
+                product_id: cart[i].cartId,
+                quantity: cart[i].cartQuantity,
+                final_price: parseFloat(cart[i].cartPrice),
+            })
+            for (let j = 0; j < products.length; j++) {
+                if (products[j].id === cart[i].cartId) {
+                    let stock = products[j].stock - cart[i].cartQuantity;
+                    await API.put(`/products/${cart[i].cartId}`, {
+                        stock: stock,
+                    })
+                }
+            }
+        }
+        setShowLoading(false);
+        setShowCart(false);
+        setCart([]);
+        setType();
+        setShowAlert3(true);
+
+    };
 
     const afterCreate = async () => {
         await mutate('/requests', async requests => {
@@ -260,11 +265,11 @@ const ProductClientList = () => {
                     searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
                         <IonCol  size={"6"}>
                             <IonCard key={i}>
-                                <IonImg src={ `http://192.168.100.20:8000/storage/${ search.image }` }
+                                <IonImg src={ `https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ search.image }` }
                                         style={{height: "100px"}}/>
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
-                                    <IonCardSubtitle><p>{search.price.toFixed(2)}</p>
+                                    <IonCardSubtitle><p>{parseFloat(search.price).toFixed(2)}</p>
                                         <p align={"right"}>
                                             <IonIcon icon={addCircleOutline}
                                                      style={{width:"25px", height:"25px"}}
@@ -280,11 +285,11 @@ const ProductClientList = () => {
                     products.filter(i => i.stock  > 0).map((product,i)=>(
                         <IonCol size={"6"}>
                             <IonCard key={i} >
-                                <IonImg style={{ height: "100px"}} src={ `http://192.168.100.20:8000/storage/${ product.image }` }
+                                <IonImg style={{ height: "100px"}} src={ `https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ product.image }` }
                                 />
                                 <IonCardContent>
                                     <IonCardTitle><p>{product.name}</p></IonCardTitle>
-                                    <IonCardSubtitle><p>{product.price.toFixed(2)}</p>
+                                    <IonCardSubtitle><p>{parseFloat(product.price).toFixed(2)}</p>
                                     <p align={"right"}>
                                         <IonIcon icon={addCircleOutline}
                                                  style={{width:"25px", height:"25px"}}
@@ -311,7 +316,7 @@ const ProductClientList = () => {
                  cart.map((car,i)=>(
                     <IonItem key={i}>
                         <IonAvatar slot={"start"}>
-                            <IonImg src={`http://localhost:8000/storage/${ car.cartImage }`} />
+                            <IonImg src={`https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ car.cartImage }`} />
                         </IonAvatar>
                         <IonLabel>
                             <IonRow>
@@ -423,6 +428,17 @@ const ProductClientList = () => {
                 header={'Tipo de entrega'}
                 message={'No ha seleccionado un tipo de entrega'}
                 buttons={['OK']}
+            />
+            <IonAlert
+                isOpen={showAlert5}
+                onDidDismiss={(()=>setShowAlert5(false))}
+                cssClass={'my-custom-class'}
+                header={'Nueva Compra'}
+                message={'Usted debe confirmar su compra'}
+                buttons={[{
+                    text:'OK',
+                    handler: onConfirm,
+                }]}
             />
             <IonLoading
                 isOpen={showLoading}

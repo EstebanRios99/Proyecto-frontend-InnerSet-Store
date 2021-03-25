@@ -1,7 +1,6 @@
 import {useProducts} from "../data/useProducts";
 import {Row, Col, Skeleton, Form, Input, message, Modal, Card} from "antd";
 import React, {useState} from "react";
-import ShowError from "./ShowError";
 import {
     IonButton,
     IonCard, IonCardContent,
@@ -98,7 +97,7 @@ const ProductOwnerList = () => {
     }
 
     if( isError ) {
-        return <ShowError error={ isError } />;
+        return "";
     }
 
     const showDetails = (index)=>{
@@ -125,11 +124,11 @@ const ProductOwnerList = () => {
                     searchProduct.map((search, i)=>(
                         <IonCol  size="6">
                             <IonCard key={i} onClick={()=>showDetail(search.id)} >
-                                    <IonImg src={ `http://192.168.100.20:8000/storage/${ search.image }` }
+                                    <IonImg src={ `https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ search.image }` }
                                          style={{height: "100px"}}/>
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
-                                    <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
+                                    <IonCardSubtitle>{parseFloat(search.price).toFixed(2)}</IonCardSubtitle>
                                     <IonCardSubtitle>{
                                         search.stock > 5
                                         ? <strong>Stock: {search.stock}</strong>
@@ -145,11 +144,11 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
-                                <IonImg style={{ height: "100px"}} src={ `http://192.168.100.20:8000/storage/${ product.image }` }
+                                <IonImg style={{ height: "100px"}} src={ `https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ product.image }` }
                                      />
                         <IonCardContent>
                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
-                            <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
+                            <IonCardSubtitle>{parseFloat(product.price).toFixed(2)}</IonCardSubtitle>
                             <IonCardSubtitle>{
                                 product.stock > 5
                                     ? <strong>Stock: {product.stock}</strong>
@@ -166,7 +165,7 @@ const ProductOwnerList = () => {
                 product.isLoading
                     ? <div>Cargando...</div>
                     : product.isError
-                    ? <ShowError error={product.isError}/>
+                    ? " "
                     : <>
                         <Modal  title="Producto" style={{background:"blue"}}
                                 visible={showInfo}
@@ -181,7 +180,7 @@ const ProductOwnerList = () => {
                                     <IonCol>
                                         <IonItem>
                                             <IonThumbnail style={{width: "100px", height:"100px"}}>
-                                                <IonImg src={ `http://localhost:8000/storage/${ product.product.image }` }
+                                                <IonImg src={ `https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ product.product.image }` }
                                                 />
                                             </IonThumbnail>
                                         </IonItem>

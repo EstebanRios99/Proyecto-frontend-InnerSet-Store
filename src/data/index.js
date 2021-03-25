@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import Routes from '../constants/routes';
 import history from '../utils/history';
 
-const baseURL = process.env.REACT_APP_API_HOST;
+const baseURL = 'https://proyecto-inner-set-store-olosd.ondigitalocean.app/api';
 let headers = { 'Accept': 'application/json' };
 
 /**
