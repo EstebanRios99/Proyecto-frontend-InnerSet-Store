@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
     IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonDatetime,
-    IonHeader, IonImg, IonItem, IonLabel, IonLoading,
+    IonHeader, IonImg, IonItem, IonLabel,
     IonPage,
     IonTitle,
     IonToolbar,
@@ -55,7 +55,7 @@ const Reports = () => {
 
                     />
                 </IonItem>
-                    <a href={`http://localhost:8000/api/pdf/requests/${moment(startDate).format('YYYYMMDD')}/${moment(endDate).format('YYYYMMDD')}`}
+                    <a href={`https://proyecto-inner-set-store-olosd.ondigitalocean.app/api/pdf/requests/${moment(startDate).format('YYYYMMDD')}/${moment(endDate).format('YYYYMMDD')}`}
                        id={"text"}
                     >
                         <IonCard>
@@ -67,7 +67,7 @@ const Reports = () => {
                             </IonCardHeader>
                         </IonCard>
                     </a>
-                    <a href={`http://localhost:8000/api/pdf/products/${moment(startDate).format('YYYYMMDD')}/${moment(endDate).format('YYYYMMDD')}`}
+                    <a href={`https://proyecto-inner-set-store-olosd.ondigitalocean.app/api/pdf/products/${moment(startDate).format('YYYYMMDD')}/${moment(endDate).format('YYYYMMDD')}`}
                        id={"text"}
                     >
                         <IonCard>
@@ -79,7 +79,7 @@ const Reports = () => {
                             </IonCardHeader>
                         </IonCard>
                     </a>
-                    <a href="http://localhost:8000/api/pdf/stock" id={"text"} >
+                    <a href="https://proyecto-inner-set-store-olosd.ondigitalocean.app/api/pdf/stock" id={"text"} >
                         <IonCard>
                             <IonImg src={stock}
                                     style={{height: "100px"}}/>

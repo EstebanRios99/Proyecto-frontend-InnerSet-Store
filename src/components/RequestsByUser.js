@@ -74,7 +74,7 @@ const RequestsByUser = () => {
                   <IonItem key={i} onClick={()=>handleShowDetail(requests)}>
                        <IonLabel>
                           <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
-                          <div><p><strong>Total: </strong>{requests.total.toFixed(2)}</p></div>
+                          <div><p><strong>Total: </strong>{parseFloat(requests.total).toFixed(2)}</p></div>
                           <div><p><strong>Estado: </strong>{requests.status === "new"
                               ? "Nuevo"
                               : requests.status=== "pending"
@@ -204,7 +204,7 @@ const RequestsByUser = () => {
                                                                 <p align={"center"}>{detail.quantity}</p>
                                                               </IonCol>
                                                               <IonCol>
-                                                                <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
+                                                                <p align={"center"}>{parseFloat(detail.finalprice).toFixed(2)}</p>
                                                               </IonCol>
                                                           </IonRow>
                                                       </IonLabel>
@@ -219,7 +219,7 @@ const RequestsByUser = () => {
                                                           <p align={"right"}><strong>Subtotal:</strong></p>
                                                       </IonCol>
                                                       <IonCol>
-                                                          <p align={"center"}>{request.request.subtotal.toFixed(2)}</p>
+                                                          <p align={"center"}>{parseFloat(request.request.subtotal).toFixed(2)}</p>
                                                       </IonCol>
                                                   </IonRow>
                                               </IonLabel>
@@ -232,7 +232,7 @@ const RequestsByUser = () => {
                                                           <p align={"right"}><strong>Recargo:</strong></p>
                                                       </IonCol>
                                                       <IonCol>
-                                                          <p align={"center"}>{request.request.surcharge.toFixed(2)}</p>
+                                                          <p align={"center"}>{parseFloat(request.request.surcharge).toFixed(2)}</p>
                                                       </IonCol>
                                                   </IonRow>
                                               </IonLabel>
@@ -245,7 +245,7 @@ const RequestsByUser = () => {
                                                           <p align={"right"}><strong>Total:</strong></p>
                                                       </IonCol>
                                                       <IonCol>
-                                                          <p align={"center"}>{request.request.total.toFixed(2)}</p>
+                                                          <p align={"center"}>{parseFloat(request.request.total).toFixed(2)}</p>
                                                       </IonCol>
                                                   </IonRow>
                                               </IonLabel>

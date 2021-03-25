@@ -8,7 +8,7 @@ export const useRequestsByUser = () => {
         requestsByUser: data && data.data ,
         isLoadingRequests: !data && !error,
         isErrorRequests: error,
-        mutate
+        mutateByUser: mutate
     }
 }
 

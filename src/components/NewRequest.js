@@ -116,9 +116,8 @@ const NewRequest = () =>{
                         }
                         <IonLabel>
                             <div><h2><strong>N° de pedido: </strong>{orders.id}</h2></div>
-                            <div><p><strong>Numero de casa: </strong>{orders.usertype.home_number}</p></div>
                             <div><p><strong>Ordenado por: </strong>{orders.user.name}</p></div>
-                            <div><p><strong>Total: </strong>{orders.total.toFixed(2)}</p></div>
+                            <div><p><strong>Total: </strong>{parseFloat(orders.total).toFixed(2)}</p></div>
                             {orders.type==='withdraw'
                                 ? <div><p><strong>Orden para: </strong> Retirar</p></div>
                                 : <div><p><strong>Orden a: </strong>Domicilio</p></div>
@@ -134,7 +133,7 @@ const NewRequest = () =>{
             request.isLoading
                 ? <><Skeleton/></>
                 : request.isError
-                ? <ShowError error={request.isError}/>
+                ? ""
                 : <>
                 <Modal  title="Detalle del pedido" className={"report"}
                         visible={showDetail}
@@ -234,7 +233,7 @@ const NewRequest = () =>{
                                                         <p align={"center"}>{detail.quantity}</p>
                                                     </IonCol>
                                                     <IonCol>
-                                                        <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
+                                                        <p align={"center"}>{parseFloat(detail.finalprice).toFixed(2)}</p>
                                                     </IonCol>
                                                 </IonRow>
                                             </IonLabel>
@@ -248,7 +247,7 @@ const NewRequest = () =>{
                                                     <p align={"right"}><strong>Subtotal:</strong></p>
                                                 </IonCol>
                                                 <IonCol>
-                                                    <p align={"center"}>{request.request.subtotal.toFixed(2)}</p>
+                                                    <p align={"center"}>{parseFloat(request.request.subtotal).toFixed(2)}</p>
                                                 </IonCol>
                                         </IonRow>
                                     </IonLabel>
@@ -261,7 +260,7 @@ const NewRequest = () =>{
                                                 <p align={"right"}><strong>Recargo:</strong></p>
                                             </IonCol>
                                             <IonCol>
-                                                <p align={"center"}>{request.request.surcharge.toFixed(2)}</p>
+                                                <p align={"center"}>{parseFloat(request.request.surcharge).toFixed(2)}</p>
                                             </IonCol>
                                         </IonRow>
                                     </IonLabel>
@@ -274,7 +273,7 @@ const NewRequest = () =>{
                                                     <p align={"right"}><strong>Total:</strong></p>
                                                 </IonCol>
                                                 <IonCol>
-                                                    <p align={"center"}>{request.request.total.toFixed(2)}</p>
+                                                    <p align={"center"}>{parseFloat(request.request.total).toFixed(2)}</p>
                                                 </IonCol>
                                         </IonRow>
                                     </IonLabel>
