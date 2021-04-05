@@ -100,7 +100,7 @@ const NewRequest = () =>{
         <IonList>
             {
                 requests ?
-                requests.filter(i => i.date  === moment().format('YYYY-MM-D')).map( ( orders, i ) => (
+                requests.filter(i => i.status  !== "delivered").map( ( orders, i ) => (
                     <IonItem key={i} onClick={()=>handleShowDetail(orders)}>
                         {orders.status==='pending'
                         ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#ff4961"}}/>

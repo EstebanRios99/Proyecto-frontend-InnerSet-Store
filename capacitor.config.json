@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "test",
+  "appId": "io.ionic.innerset",
+  "appName": "InnerSet Store",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

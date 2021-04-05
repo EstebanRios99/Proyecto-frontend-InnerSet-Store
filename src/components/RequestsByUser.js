@@ -70,7 +70,7 @@ const RequestsByUser = () => {
       <>
           <IonList>
               { requestsByUser ?
-                  requestsByUser.filter(i => i.date  === moment().format('YYYY-MM-D')).map( ( requests, i ) => (
+                  requestsByUser.filter(i => i.status  !== "delivered").map( ( requests, i ) => (
                   <IonItem key={i} onClick={()=>handleShowDetail(requests)}>
                        <IonLabel>
                           <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
