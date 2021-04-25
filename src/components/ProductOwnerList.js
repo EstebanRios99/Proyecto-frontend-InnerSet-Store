@@ -195,16 +195,15 @@ const ProductOwnerList = () => {
                                     initialValues={{
                                         remember: true,
                                     }}
-                                    //onFinish={onUpdate}
                                 >
                                     <Form.Item label="Nombre Producto" name='name' hasFeedback>
                                         <Input  placeholder={product.product.name}/>
                                     </Form.Item>
-                                    <Form.Item label="Stock" name='stock' hasFeedback>
-                                        <Input  placeholder={product.product.stock}/>
+                                    <Form.Item label="Stock" name='stock'>
+                                        <Input type="number" min="1" placeholder={product.product.stock}/>
                                     </Form.Item>
-                                    <Form.Item label="Precio" name='price' hasFeedback >
-                                        <Input  placeholder={product.product.price}/>
+                                    <Form.Item label="Precio" name='price'>
+                                        <Input type="number" min="0.01" step="0.01" placeholder={product.product.price}/>
                                     </Form.Item>
                                 </Form>
                         </Modal>

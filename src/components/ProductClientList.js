@@ -8,7 +8,7 @@ import {
     IonCardSubtitle,
     IonCardTitle, IonCol, IonText, IonItem,
     IonRow, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonToast, IonBadge, IonLoading
+    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonBadge, IonLoading
 } from "@ionic/react";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
@@ -108,13 +108,14 @@ const ProductClientList = () => {
         let total = 0;
         let quantity=document.querySelector( `#${index.cartName.split(" ").join("")}` ).value;
         console.log("nuevaCantidad", quantity);
+        if (quantity > 0){
         for (let i=0; i < cart.length; i++){
             if (index.cartId === cart[i].cartId){
                 cart[i].cartPrice = parseFloat(((index.cartPrice/cart[i].cartQuantity) * quantity).toFixed(2));
                 cart[i].cartQuantity = quantity;
             }
             total = total + parseFloat(cart[i].cartPrice);
-        }
+        }}
         setTotal(total);
         console.log ("nuevoCarrito", cart);
     }
@@ -133,7 +134,7 @@ const ProductClientList = () => {
             for (let i=0; i<cart.length; i++) {
                 for (let j = 0; j < products.length; j++) {
                     if (products[j].id === cart[i].cartId){
-                        if(products[j].stock > cart[i].cartQuantity) {
+                        if(products[j].stock >= cart[i].cartQuantity) {
                             cart2.push(cart[i]);
                         }else{
                             setNoStock(cart[i].cartName + ', solo se dispone de '+ products[j].stock);
@@ -319,8 +320,8 @@ const ProductClientList = () => {
                             <IonImg src={`https://proyecto-inner-set-store-olosd.ondigitalocean.app/storage/${ car.cartImage }`} />
                         </IonAvatar>
                         <IonLabel>
+                        {car.cartName}
                             <IonRow>
-                                {car.cartName}
                                 <IonCol><InputNumber
                                     id={car.cartName.split(" ").join("")}
                                     defaultValue={car.cartQuantity}
