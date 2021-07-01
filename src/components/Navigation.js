@@ -65,10 +65,10 @@ const Navigation = (props) => {
                 </IonItem>
                 {currentUser.role==='ROLE_ADMIN'
                 ?   <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
-                        <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
+                        <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Lista de Productos</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.CLIENTPRODUCTS} icon={<FormOutlined/>} >
-                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Productos</Link>
+                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Lista de Productos</Link>
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN'
@@ -76,7 +76,7 @@ const Navigation = (props) => {
                         <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.DAILYORDER} icon={<PlusCircleOutlined/>} >
-                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de Orden</Link>
+                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de la Orden</Link>
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN'

@@ -9,6 +9,7 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonImg,
+    IonCardContent,
 } from "@ionic/react";
 import '../theme/app.css';
 import "../theme/toolbar.css";
@@ -32,14 +33,18 @@ const Profile = () => {
           <IonCard>
           <IonImg  src={user} style={{width:"150px", height:"150px", margin:'auto', display:'block'}}/>
           <IonCardHeader>
-            <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
-            <IonCardSubtitle>Correo:  {currentUser.email}</IonCardSubtitle>
-            <IonCardSubtitle>Casa:  {currentUser.home_number}</IonCardSubtitle>
             {currentUser.role==='ROLE_ADMIN'
-            ?<IonCardSubtitle>Propietario de la Tienda Víveres Daniela</IonCardSubtitle>
-            :<IonCardSubtitle>Arrendatario del Conjunto Luluncoto</IonCardSubtitle>
+              ?<IonCardTitle>Propietario de la Tienda Víveres Daniela</IonCardTitle>
+              :<IonCardTitle>Arrendatario del Conjunto Luluncoto</IonCardTitle>
+            }</IonCardHeader>
+            <IonCardContent>
+              <IonCardSubtitle><p style={{color:"black"}}><strong>Nombre: </strong>{currentUser.name}</p></IonCardSubtitle>
+              <IonCardSubtitle><p style={{color:"black"}}><strong>Correo:  </strong>{currentUser.email}</p></IonCardSubtitle>
+              {currentUser.role==='ROLE_ADMIN'
+              ?""
+              :<IonCardSubtitle><p style={{color:"black"}}><strong>Casa:  </strong>{currentUser.home_number}</p></IonCardSubtitle>
             }
-          </IonCardHeader>
+            </IonCardContent>       
         </IonCard>
         </IonPage>
     </>

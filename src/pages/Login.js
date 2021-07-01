@@ -9,7 +9,7 @@ import { translateMessage } from '../utils/translateMessage';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
 import '../theme/login.css';
-import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
+import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton, IonRow, IonCol, IonGrid} from '@ionic/react';
 import '../theme/toolbar.css';
 import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
@@ -72,11 +72,11 @@ const Login = () => {
                 rules={ [
                     {
                         required: true,
-                        message: 'Ingresa tu nombre de usuario'
+                        message: 'Ingrese su correo registrado'
                     },
                     {
                         type: 'email',
-                        message: 'Ingresa un correo válido'
+                        message: 'Ingrese un correo válido'
                     }
                 ] }
             >
@@ -91,7 +91,7 @@ const Login = () => {
                 rules={ [
                     {
                         required: true,
-                        message: 'Ingresa tu clave'
+                        message: 'Ingrese su contraseña'
                     }
                 ] }
             >
@@ -102,12 +102,22 @@ const Login = () => {
                 />
             </Form.Item>
 
-              <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>Registrate</Link></div>
-
             <Form.Item>
-                <IonButton type='primary' htmlType='submit' className='login-form-button'>
-                    Ingresar
-                </IonButton>
+            <div align="center">¿Aún no tienes cuenta con nosotros? </div>
+            <IonGrid>
+              <IonRow>
+                <IonCol> 
+                  <Link to={ Routes.REGISTER }><IonButton id="button-register">Regístrate</IonButton></Link>
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonButton type='primary' htmlType='submit' className='login-form-button' id="button-login">
+                      Ingresar
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+              </IonGrid>
             </Form.Item>
         </Form>
     </IonPage>

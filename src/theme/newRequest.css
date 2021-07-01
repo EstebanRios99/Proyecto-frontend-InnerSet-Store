@@ -1,0 +1,24 @@
+#chip-pending{
+    --background: #eb445a;
+    --color: #ffffff;
+}
+#chip-accomplished{
+    --background: #ffd534;
+    --color: #ffffff;
+}
+#chip-retired{
+    --background: #50c8ff;
+    --color: #ffffff;
+}
+#chip-sent{
+    --background: #ff9b48;
+    --color: #ffffff;
+}
+#chip-delivered{
+    --background: #2fdf75;
+    --color: #ffffff;
+}
+#chip{
+    --background: #ffffff;
+    --color: #000000;
+}

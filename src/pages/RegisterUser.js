@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from '../constants/routes';
 import API from '../data/index';
-import { Form, Input, message} from 'antd';
+import { Form, Input,message} from 'antd';
 import {
     LockOutlined,
     UserOutlined,
@@ -91,7 +91,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa tu nombre'
+                                           message: 'Ingrese su nombre'
                                        }
                                    ]}
                                    hasFeedback
@@ -102,27 +102,24 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                             required: true,
-                                            message: 'Ingresa tu número de casa, 1 -60',
-                                       },
-                                       {
-                                            min: 1,
-                                            max: 60,
-                                            message: 'El numero de casa debe ser del 1-60'
+                                            message: 'Ingrese su número de casa (1-60)',
                                        }
                                    ]}
-                                   hasFeedback
+                                   
                         >
-                            <Input prefix={<NumberOutlined/>} placeholder='Número de Casa'/>
+                            
+                            <Input prefix={<NumberOutlined/>} type="number" min="1" max="60" placeholder='Número de Casa'/>
+                            
                         </Form.Item>
                         <Form.Item name='email'
                                    rules={[
                                        {
                                             required: true,
-                                            message: 'Ingresa tu email'
+                                            message: 'Ingrese su correo'
                                        },
                                        {
                                             type: 'email',
-                                            message: 'Ingresa un correo válido'
+                                            message: 'Ingrese un correo válido'
                                        }
                                    ]}
                                    hasFeedback
@@ -134,11 +131,11 @@ const RegisterUser = () => {
                                    rules={[
                                         {
                                             required: true,
-                                            message: 'Ingresa tu contraseña',
+                                            message: 'Ingrese su contraseña',
                                         },
                                         {
                                             min: 6,
-                                            message: 'La longitud de ser mínimo 6 caracteres',
+                                            message: 'Ingrese mínimo 6 caracteres',
                                         }
                                    ]}
                                    hasFeedback
@@ -154,7 +151,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Confirma tu contraseña',
+                                           message: 'Confirme su contraseña',
                                        },
                                        ({getFieldValue}) => ({
                                            validator(rule, value) {
@@ -172,7 +169,7 @@ const RegisterUser = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <IonButton type='primary' htmlType='submit' className='login-form-button'>
+                            <IonButton id="button-register" type='primary' htmlType='submit' className='login-form-button'>
                                 Registrar
                             </IonButton>
                         </Form.Item>

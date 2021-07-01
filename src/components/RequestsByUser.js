@@ -8,13 +8,14 @@ import {
     IonThumbnail,
     IonSkeletonText,
     IonProgressBar,
-    IonGrid, IonRow, IonCol, IonButton
+    IonGrid, IonRow, IonCol, IonButton, IonChip,IonIcon
 } from "@ionic/react";
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
 import "../theme/toolbar.css";
+import "../theme/requestU.css";
 import {Modal} from "antd";
-import moment from "moment";
+import {chevronDownCircleOutline } from "ionicons/icons";
 
 
 const RequestsByUser = () => {
@@ -71,9 +72,19 @@ const RequestsByUser = () => {
           <IonList>
               { requestsByUser ?
                   requestsByUser.filter(i => i.status  !== "delivered").map( ( requests, i ) => (
-                  <IonItem key={i} onClick={()=>handleShowDetail(requests)}>
+                  <IonItem key={i}>
                        <IonLabel>
-                          <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
+                          <div>
+                              <p>
+                                <strong>N° de pedidos: </strong>{requests.id}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <IonChip id="chip"  onClick={()=>handleShowDetail(requests)}>
+                                    <IonIcon  icon={chevronDownCircleOutline} style={{height:"22px", width: "22px"}}/>
+                                    <IonLabel>Ver Detalle</IonLabel>
+                                </IonChip>
+                              </p>
+                          </div>
                           <div><p><strong>Total: </strong>{parseFloat(requests.total).toFixed(2)}</p></div>
                           <div><p><strong>Estado: </strong>{requests.status === "new"
                               ? "Nuevo"

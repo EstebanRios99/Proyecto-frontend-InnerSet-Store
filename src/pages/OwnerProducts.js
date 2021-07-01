@@ -52,7 +52,12 @@ const OwnerProductsPage = () => {
             </IonPage>
             <IonPopover isOpen={popoverState} cssClass='my-custom-class'
             onDidDismiss={() => setPopoverState(false)}>
-                <div style={{background:'#3880ff'}}><h3 style={{'text-align':'center'}}>Usted tiene {data.length} ordenes nuevas</h3></div>
+                {
+                    data.length === 1 
+                    ? <div style={{background:'#3880ff'}}><h3 style={{'text-align':'center'}}>Usted tiene {data.length} orden nueva</h3></div>
+                    : <div style={{background:'#3880ff'}}><h3 style={{'text-align':'center'}}>Usted tiene {data.length} ordenes nuevas</h3></div>
+                }
+                
                 {
                     data.map((orders, i)=>(
                         <IonList key={i}>

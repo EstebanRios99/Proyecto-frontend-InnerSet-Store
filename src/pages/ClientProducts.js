@@ -59,7 +59,7 @@ const ClientProductsPage = () => {
                     data.map((orders, i)=>(
                         <IonList key={i}>
                             <IonItem> Orden Nº {orders.id}
-                            <br/> Estado de orden: {orders.status === "pending" ? <p>Pendiente</p> : ""} </IonItem>
+                            <br/> Estado de orden: {orders.status === "pending" ? "Pendiente" : ""} </IonItem>
                         </IonList>
                     ))
                 }       

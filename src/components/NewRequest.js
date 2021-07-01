@@ -4,7 +4,7 @@ import {useRequests} from '../data/useRequests';
 import ShowError from "./ShowError";
 import {translateMessage} from "../utils/translateMessage";
 import {
-    IonList,
+    IonList, IonChip,
     IonItem,
     IonLabel, IonButton,
     IonGrid, IonRow, IonCol, IonIcon, IonText, IonLoading
@@ -12,11 +12,12 @@ import {
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
 import "../theme/toolbar.css";
-import {ellipse} from "ionicons/icons";
+import "../theme/newRequest.css";
+import {chevronDownCircleOutline} from "ionicons/icons";
 import {CloseOutlined} from '@ant-design/icons';
 import Skeleton from './Skeleton';
 import {Modal, message} from 'antd';
-import moment from "moment";
+
 
 
 const NewRequest = () =>{
@@ -101,17 +102,27 @@ const NewRequest = () =>{
             {
                 requests ?
                 requests.filter(i => i.status  !== "delivered").map( ( orders, i ) => (
-                    <IonItem key={i} onClick={()=>handleShowDetail(orders)}>
+                    <IonItem key={i}>
                         {orders.status==='pending'
-                        ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#ff4961"}}/>
+                        ?<IonChip id="chip-pending" slot="end">
+                        <IonLabel>Pendiente</IonLabel>
+                        </IonChip>
                             :orders.status=== 'accomplished'
-                            ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#ffd534"}}/>
+                            ?<IonChip id="chip-accomplished" slot="end">
+                            <IonLabel>Realizado</IonLabel>
+                            </IonChip>
                                 :orders.status==='retired'
-                                ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#50c8ff"}}/>
+                                ?<IonChip id="chip-retired" slot="end">
+                                <IonLabel>Por retirar</IonLabel>
+                                </IonChip>
                                 :orders.status==='sent'
-                                ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#ff9b48"}}/>
+                                ?<IonChip id="chip-sent" slot="end">
+                                <IonLabel>Enviado</IonLabel>
+                                </IonChip>
                                     :orders.status==='delivered'
-                                    ?<IonIcon slot="end" icon={ellipse} style={{width:"40px", height:"40px", color:"#2fdf75"}}/>
+                                    ?<IonChip id="chip-delivered"  slot="end">
+                                    <IonLabel>Finalizado</IonLabel>
+                                    </IonChip>
                                         :""
                         }
                         <IonLabel>
@@ -122,6 +133,14 @@ const NewRequest = () =>{
                                 ? <div><p><strong>Orden para: </strong> Retirar</p></div>
                                 : <div><p><strong>Orden a: </strong>Domicilio</p></div>
                             }
+                            <div>
+                                <p align="right">
+                                    <IonChip id="chip" onClick={()=>handleShowDetail(orders)}>
+                                        <IonIcon  icon={chevronDownCircleOutline} style={{height:"22px", width: "22px"}}/>
+                                        <IonLabel>Ver Detalle</IonLabel>
+                                    </IonChip>
+                                </p>
+                            </div>
                         </IonLabel>
                     </IonItem>
                 ))

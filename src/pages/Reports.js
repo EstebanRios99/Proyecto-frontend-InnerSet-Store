@@ -16,8 +16,8 @@ import stock from '../images/stock.png';
 
 const Reports = () => {
 
-    const [startDate, setStartDate]=useState('');
-    const [endDate, setEndDate]=useState('');
+    const [startDate, setStartDate]=useState(moment().format('YYYY-MM-D'));
+    const [endDate, setEndDate]=useState(moment().format('YYYY-MM-D'));
 
     return    (
         <>
@@ -37,6 +37,7 @@ const Reports = () => {
                         displayFormat="DD MMM YYYY"
                         placeholder="Seleccione Fecha"
                         value={startDate}
+                        max={moment().format('YYYY-MM-D')}
                         onIonChange={e => setStartDate(e.detail.value)}
                         doneText={"Aceptar"}
                         cancelText={"Cancelar"}
@@ -49,6 +50,7 @@ const Reports = () => {
                         displayFormat="DD MMM YYYY"
                         placeholder="Seleccione Fecha"
                         value={endDate}
+                        max={moment().format('YYYY-MM-D')}
                         onIonChange={e => setEndDate(e.detail.value)}
                         doneText={"Aceptar"}
                         cancelText={"Cancelar"}

@@ -4,7 +4,7 @@ import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 import '../theme/register.css';
-import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonLoading} from "@ionic/react";
+import {IonButton, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonLoading, IonGrid, IonRow, IonCol} from "@ionic/react";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -12,7 +12,7 @@ import {useCategories} from "../data/useCategories";
 import "../theme/toolbar.css";
 import Layouts from '../components/Layout';
 import '../theme/app.css';
-import '../theme/login.css';
+import '../theme/registerp.css';
 import viveres from '../images/viveres.jpg'
 
 
@@ -156,14 +156,13 @@ const RegisterProduct = () => {
                         form={form}
                           initialValues={{
                               remember: true,
-                          }}
-                          //onFinish={onCreate}
+                          }}                          
                     >
                         <Form.Item name='name'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa nombre del producto'
+                                           message: 'Ingrese nombre del producto'
                                        }
                                    ]}
                                    hasFeedback
@@ -174,30 +173,30 @@ const RegisterProduct = () => {
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa el stock o la cantidad del producto'
+                                           message: 'Ingrese el stock o la cantidad del producto'
                                        },
                                    ]}
-                                   hasFeedback
+                                   
                         >
-                            <Input  placeholder='Cantidad del producto o Stock'/>
+                            <Input type="number" min="1" placeholder='Cantidad del producto o Stock'/>
                         </Form.Item>
                         <Form.Item name='price'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa el precio del producto'
+                                           message: 'Ingrese el precio del producto'
                                        }
                                    ]}
-                                   hasFeedback
+                                   
                         >
-                            <Input  placeholder='Precio'/>
+                            <Input type="number" min="0.01" step="0.01" placeholder='Precio'/>
                         </Form.Item>
 
                         <Form.Item name='category_id'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa una categoría'
+                                           message: 'Ingrese una categoría'
                                        }
                                    ]}
                                    hasFeedback
@@ -222,7 +221,7 @@ const RegisterProduct = () => {
                                    rules={ [
                                        {
                                            required: true,
-                                           message: 'Sube tu foto'
+                                           message: 'Sube la foto del producto'
                                        }
                                    ] }
                         >
@@ -244,9 +243,15 @@ const RegisterProduct = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <IonButton htmlType='submit' onClick={onCreate}>
-                                Registrar Producto
-                            </IonButton>
+                            <IonGrid>
+                                <IonRow>
+                                    <IonCol>
+                                        <IonButton htmlType='submit' onClick={onCreate} id="button-registerp">
+                                            Registrar Producto
+                                        </IonButton>
+                                    </IonCol>
+                                </IonRow>
+                                </IonGrid>
                         </Form.Item>
                     </Form>
            </IonPage>

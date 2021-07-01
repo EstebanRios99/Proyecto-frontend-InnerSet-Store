@@ -5,4 +5,11 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+#button-login{
+ width: 100%;
+}
+#button-register{
+    width: 100%;
+    --background: #5260ff;
+}
 
